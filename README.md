@@ -104,7 +104,11 @@ The following are the valid section _types_.  You may omit the `type` and `page`
 
 ### Path
 
-Path should be a relative link and begin with `/`.  Not all resources should use `path`.
+Path should be a relative link and begin with `/`.  Not all resources should use `path`.  Use URL placeholders, e.g. _user/{user}_.
+
+### More (Info)
+
+Optional, URL hyperlink to anything that provides more info for the section, a Trello card, website, documentation, etc.  This makes the title clickable.
 
 ## Theming
 
