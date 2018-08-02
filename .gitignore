@@ -1,3 +1,5 @@
 /lib/loft_php_lib/*
 !/lib/loft_php_lib/dist
 /vendor
+/user_templates/*
+!/user_templates/.gitkeep
