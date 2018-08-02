@@ -25,9 +25,10 @@ try {
     echo '.';
     try {
       Bash::exec([
-        './vismap.php',
+        ROOT . '/vismap.php',
         $definition_file,
         $cli->hasFlag('f') ? '-f' : '',
+        $cli->hasParam('out') ? '--out=' . $cli->getParam('out') : '',
       ]);
     }
     catch (\Exception $exception) {
@@ -41,9 +42,10 @@ try {
   echo '.';
   try {
     Bash::exec([
-      './vismap.php',
+      ROOT . '/vismap.php',
       $definition_file,
       $cli->hasFlag('f') ? '-f' : '',
+      $cli->hasParam('out') ? '--out=' . $cli->getParam('out') : '',
     ]);
   }
   catch (\Exception $exception) {
