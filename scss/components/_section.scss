@@ -90,6 +90,10 @@
   font-weight: bold;
   display: flex;
   align-items: center;
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 .section__path {

@@ -174,6 +174,7 @@ class VisualSitemap {
       }),
       'title' => $title = $this->g->get($definition, 'title'),
       'path' => $this->g->get($definition, 'path'),
+      'more' => $this->g->get($definition, 'more'),
       'section' => $this->g->get($definition, 'section', '', function ($value, $default) use ($title) {
         return empty($value) ? strtoupper(substr($title, 0, 1)) : $value;
       }),
