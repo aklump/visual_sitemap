@@ -31,7 +31,7 @@ This is a suggested installation strategy.  It assumes that _~/bin_ is in your `
 
 ## Contributing
 
-If you find this project useful... please consider [making a donation](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4E5KZHDQCEUV8).
+If you find this project useful... please consider [making a donation](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4E5KZHDQCEUV8&item_name=Gratitude%20for%20aklump%2Fvisual_sitemap).
 
 ## Best Practices
 
