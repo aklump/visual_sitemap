@@ -1,0 +1,71 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "object",
+    "definitions": {
+        "section": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "privileged": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "type": "string",
+                    "default": "page",
+                    "enum": [
+                        "page",
+                        "content",
+                        "link",
+                        "external",
+                        "modal",
+                        "download",
+                        "form"
+                    ]
+                },
+                "path": {
+                    "type": "string",
+                    "pattern": "^\\/"
+                },
+                "sections": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/section"
+                    }
+                }
+            },
+            "required": [
+                "title"
+            ]
+        }
+    },
+    "properties": {
+        "title": {
+            "type": "string",
+            "minLength": 1
+        },
+        "subtitle": {
+            "type": "string"
+        },
+        "footer": {
+            "type": "string"
+        },
+        "timezone": {
+            "type": "string"
+        },
+        "sections": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/section"
+            }
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "title",
+        "timezone"
+    ]
+}

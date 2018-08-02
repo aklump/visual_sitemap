@@ -1,0 +1,35 @@
+{
+    "name": "aklump\/loft_php_lib",
+    "authors": [
+        {
+            "email": "sourcecode@intheloftstudios.com",
+            "homepage": "http:\/\/www.intheloftstudios.com",
+            "name": "Aaron Klump",
+            "role": "Developer"
+        }
+    ],
+    "version": "0.6.75",
+    "autoload": {
+        "files": [
+            "src\/AKlump\/LoftLib\/Xml\/LoftXmlElement.php"
+        ],
+        "psr-4": {
+            "": [
+                "src\/",
+                "tests\/"
+            ]
+        }
+    },
+    "description": "Miscellaneous PHP library classes from In the Loft Studios.",
+    "homepage": "http:\/\/www.intheloftstudios.com\/packages\/php\/loft_php_lib",
+    "license": "BSD-3-Clause",
+    "require": {
+        "php": ">=5.3.0",
+        "symfony\/yaml": "^2.7",
+        "ralouphie\/mimey": "^1.0",
+        "aklump\/loft_data_grids": "^0.4.28",
+        "illuminate\/support": "~4.2.17",
+        "aklump\/data": "^0.0.28"
+    },
+    "type": "library"
+}

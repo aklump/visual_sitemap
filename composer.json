@@ -1,0 +1,37 @@
+{
+    "name": "aklump\/visual-sitemap",
+    "type": "library",
+    "description": "Using a very simple JSON file schema to define the structure of your website, this project uses that structure to generate a beautiful, visual HTML sitemap. The final document has all icons and CSS embedded in it and can be shared with other teammembers easily.",
+    "keywords": [
+        "sitemap",
+    ],
+    "homepage": "https:\/\/github.com\/aklump\/visual_sitemap",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "email": "sourcecode@intheloftstudios.com",
+            "homepage": "http:\/\/www.intheloftstudios.com",
+            "name": "Aaron Klump",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "twig\/twig": "^2.5",
+        "aklump\/loft_php_lib": "^0.6.75",
+        "jasonlewis\/resource-watcher": "^1.2",
+        "justinrainbow\/json-schema": "^5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "AKlump\\VisualSitemap\\": "src\/AKlump\/VisualSitemap\/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": ".\/lib\/loft_php_lib\/dist"
+        }
+    ],
+    "version": "0.1"
+}

@@ -1,0 +1,3 @@
+/lib/loft_php_lib/*
+!/lib/loft_php_lib/dist
+/vendor

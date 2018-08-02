@@ -1,0 +1,271 @@
+{
+    "title": "Grassy Hills Archery Club",
+    "subtitle": "Visual Sitemap &bull; {{ \"now\"|date('F j, Y') }}",
+    "footer": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac blandit risus. Mauris tempor a lacus a placerat. Vivamus viverra dapibus metus non finibus. Nulla ultricies est nulla, eget efficitur nibh viverra non. Sed sed est viverra nunc malesuada venenatis vitae at tellus. Suspendisse potenti. Morbi non blandit elit, sit amet consectetur mi.",
+    "timezone": "America/Los_Angeles",
+    "sections": [
+        {
+            "title": "gharchery.net",
+            "sections": [
+                {
+                    "title": "Frontpage",
+                    "path": "/",
+                    "sections": [
+                        {
+                            "title": "Header",
+                            "type": "content",
+                            "sections": [
+                                {
+                                    "title": "Logo",
+                                    "type": "link"
+                                },
+                                {
+                                    "title": "Main Menu",
+                                    "type": "link"
+                                },
+                                {
+                                    "title": "User Menu",
+                                    "type": "link"
+                                }
+                            ]
+                        },
+                        {
+                            "title": "Member of the Month",
+                            "type": "link"
+                        },
+                        {
+                            "title": "Learn more Video",
+                            "type": "modal"
+                        },
+                        {
+                            "title": "App Promo",
+                            "type": "external"
+                        },
+                        {
+                            "title": "Footer",
+                            "type": "content",
+                            "sections": [
+                                {
+                                    "title": "Newsletter signup",
+                                    "type": "form"
+                                },
+                                {
+                                    "title": "Social links",
+                                    "type": "external"
+                                },
+                                {
+                                    "title": "Footer menu",
+                                    "type": "link"
+                                },
+                                {
+                                    "title": "Address & Phone",
+                                    "type": "content"
+                                },
+                                {
+                                    "title": "Terms & Conditions",
+                                    "type": "link",
+                                    "sections": [
+                                        {
+                                            "title": "Policies",
+                                            "path": "/policies"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Search Form",
+                    "type": "modal",
+                    "path": "/#m[]=modal,search",
+                    "sections": [
+                        {
+                            "title": "Text-based search",
+                            "type": "form",
+                            "sections": [
+                                {
+                                    "title": "Search Results",
+                                    "path": "/search/{search text}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "About Us",
+                    "path": "/who-we-are",
+                    "sections": [
+                        {
+                            "title": "Learn more Video",
+                            "type": "modal"
+                        }
+                    ]
+                },
+                {
+                    "title": "Blog",
+                    "path": "/blog",
+                    "sections": [
+                        {
+                            "title": "Blog Post",
+                            "path": "/blog/{year}/{month}/{title}",
+                            "sections": [
+                                {
+                                    "title": "Sharing Actions",
+                                    "type": "link"
+                                },
+                                {
+                                    "title": "Newsletter signup",
+                                    "type": "form"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Log In",
+                    "path": "/#sm=login",
+                    "type": "modal",
+                    "sections": [
+                        {
+                            "title": "Login with Facebook",
+                            "type": "link"
+                        },
+                        {
+                            "title": "Login with Drupal",
+                            "type": "form"
+                        },
+                        {
+                            "title": "Reset your password",
+                            "path": "/user/password"
+                        }
+                    ]
+                },
+                {
+                    "title": "Sign Up",
+                    "path": "/user/register",
+                    "sections": [
+                        {
+                            "title": "Sign Up with Facebook",
+                            "type": "link"
+                        },
+                        {
+                            "title": "Sign Up with Drupal",
+                            "type": "form"
+                        }
+                    ]
+                },
+                {
+                    "title": "My Account",
+                    "privileged": true,
+                    "path": "/user/settings",
+                    "sections": [
+                        {
+                            "title": "Account",
+                            "path": "/user/settings#p=account_username&sm=account-settings",
+                            "type": "modal"
+                        },
+                        {
+                            "title": "Educator Status",
+                            "path": "/user/settings#p=account_educator&sm=account-settings",
+                            "type": "modal"
+                        },
+                        {
+                            "title": "Email Preferences",
+                            "path": "/user/settings#p=account_newsletter&sm=account-settings",
+                            "type": "modal"
+                        },
+                        {
+                            "title": "Password",
+                            "path": "/user/settings#p=account_password&sm=account-settings",
+                            "type": "modal"
+                        },
+                        {
+                            "title": "Log Out",
+                            "path": "/user/logout",
+                            "type": "link"
+                        }
+                    ]
+                },
+                {
+                    "title": "Members",
+                    "path": "/members",
+                    "sections": [
+                        {
+                            "title": "Member Tiles",
+                            "type": "link"
+                        },
+                        {
+                            "title": "Member Page",
+                            "path": "/members/{name}",
+                            "sections": [
+                                {
+                                    "title": "Photo and Bio",
+                                    "type": "content"
+                                },
+                                {
+                                    "title": "Contact Links",
+                                    "type": "link"
+                                },
+                                {
+                                    "title": "Contributor's Awards",
+                                    "type": "link"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Learning",
+                    "path": "/learning",
+                    "sections": [
+                        {
+                            "title": "Resource Tiles",
+                            "type": "link"
+                        },
+                        {
+                            "title": "Learning Resource",
+                            "path": "/resources/{name}",
+                            "sections": [
+                                {
+                                    "title": "Photo and Info",
+                                    "type": "content"
+                                },
+                                {
+                                    "title": "PDF",
+                                    "path": "/sites/default/files/resources/{filename}",
+                                    "type": "download"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Contact Us",
+                    "path": "/contact",
+                    "type": "form"
+                },
+                {
+                    "title": "Sponsors",
+                    "path": "/sponsors",
+                    "sections": [
+                        {
+                            "title": "Sponsor Logos",
+                            "type": "external"
+                        }
+                    ]
+                },
+                {
+                    "title": "RSS Feeds",
+                    "path": "/rss",
+                    "sections": [
+                        {
+                            "title": "iTunes Podcast RSS",
+                            "type": "download"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

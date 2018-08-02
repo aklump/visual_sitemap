@@ -1,0 +1,98 @@
+//
+//
+// Style overrides for basic html elements.
+//
+
+html {
+  font-family: map_get($font, base);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-family: map_get($font, heading);
+  color: $color--headings;
+}
+
+.title {
+  font-size: 2rem;
+  text-align: center;
+  display: block;
+}
+
+.subtitle {
+  font-size: 1.4rem;
+  text-align: center;
+  display: block;
+}
+
+header {
+  margin-top: $gap__fixed--v;
+  margin-bottom: $gap__fixed--v--tall;
+}
+
+footer {
+  text-align: center;
+  margin: $gap__fixed--v auto $gap__fixed--v--tall;
+  color: $color--grey;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.credit {
+  margin-top: $gap__fixed--v;
+  text-align: right;
+  font-size: .6rem;
+  color: $color--black;
+  margin: 0 $gap__fixed--h--wide $gap__fixed--v 0;
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  li {
+    margin: 5px;
+  }
+  li:last-child {
+    margin-bottom: 0;
+  }
+}
+
+ul.level0 {
+  flex-direction: column;
+  > li:first-child {
+    margin-bottom: $gap__fixed--v--tall;
+  }
+}
+
+ul.level1 {
+  align-items: flex-start;
+  > li {
+    margin-bottom: $gap__fixed--v;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+ul.level2 {
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: $gutter / 2;
+  padding-left: $gutter / 2;
+  border-left: 3px solid $color--grey--lines;
+}
+
+ul.level5,
+ul.level4,
+ul.level3 {
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: $gutter;
+  margin-left: $gutter / 2;
+  padding-left: $gutter / 2;
+  border-left: 3px solid $color--grey--lines;
+  margin-top: $gap__fixed--v / 2;
+  margin-bottom: $gap__fixed--v / 2;
+}

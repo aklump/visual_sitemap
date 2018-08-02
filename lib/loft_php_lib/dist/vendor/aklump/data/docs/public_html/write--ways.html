@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Ways to Write Data</title>
+    <link href="search/tipuesearch.css" rel="stylesheet">
+    <style type="text/css" media="all">
+      @import url("style.css");
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="search/tipuesearch_content.js"></script>
+    <script src="search/tipuesearch_set.js"></script>
+    <script src="search/tipuesearch.min.js"></script>
+    <script src="js/core.js"></script>
+
+</head>
+
+<body class="page-write--ways">
+<header>
+<div class="pager">
+  <a href="defined-vars.html" class="prev defined-vars">&laquo;Getting Variables</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="conditionals.html" class="next conditionals">Conditionals&raquo;</a>
+</div>
+
+</header>
+
+<div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+<h1>Ways to Write Data</h1>
+<div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+
+<h2><code>set()</code> vs. <code>ensure()</code> vs. <code>fill()</code></h2>
+
+<p>To understand these methods, lets' use a metaphore.  Imagine a table with nothing on it.  On the floor is a bucket, inside of which is a banana.  Next to the bucket is an apple.</p>
+
+<p>Using <code>set()</code> is akin to placing the bucket on the table, removing the banana and putting the apple inside the bucket.</p>
+
+<ul>
+<li>The table is your <em>containing variable</em>.</li>
+<li>The bucket is the <em>path</em> inside the variable.</li>
+<li>The banana is the <em>old value</em> at the path.</li>
+<li>The apple is the <em>new value</em> a the path.</li>
+</ul>
+
+<h3><code>ensure()</code></h3>
+
+<p>Start with an empty table, an empty bucket on the floor and the apple.  After calling ensure, we have a bucket with the apple in it on the table.</p>
+
+<p>Now consider the same scenario but the bucket has the banana in it to start with, and the bucket is on the floor.  After calling ensure, we have a bucket <em>still with a banana in it</em>, but the bucket is <em>on the table</em>.</p>
+
+<p>Lastly, think of the table with a bucket on it containing the banana.  After calling ensure you would see no change.</p>
+
+<p>When you call <code>ensure()</code>, you ensure there is a bucket on the table, if not you put one there.  Then we look inside the bucket on the table to see if it's empty, if so we place the apple inside of it.</p>
+
+<h3><code>fill()</code></h3>
+
+<p>If you understand <code>ensure()</code> then you should be able to get <code>fill()</code> rather quickly.</p>
+
+<p>Calling fill will not place the bucket on the table, only fill it if it's already on the table AND it's empty.  How a bucket is considered empty is configurable, so refer to the docblocks for that.</p>
+
+<h3><code>set()</code></h3>
+
+<p>So with those out of the way, <code>set()</code> is a piece of cake.</p>
+
+<p>Set doesn't care if there is a bucket on the table or not.  Set will walk up to the table grab the bucket, dump it out, set it on the table, and put the apple in it.  No consideration of anything.</p>
+
+<h2>In Summary</h2>
+
+<table>
+<thead>
+<tr>
+  <th></th>
+  <th>set</th>
+  <th>ensure</th>
+  <th>fill</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>guarantees key/property</td>
+  <td>Y</td>
+  <td>Y</td>
+  <td>-</td>
+</tr>
+<tr>
+  <td>overwrites current value</td>
+  <td>Y</td>
+  <td>-</td>
+  <td>only if empty</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>Use <code>fill()</code> if you want to make sure no value is empty, but do not want to add the key/property if non-existent.</li>
+<li>Use <code>ensure()</code> if you only care that a key/property is set, but not the value.</li>
+<li>Use <code>set()</code> if you want to overwrite current values, while knowing that a key/property is surely set.</li>
+<li>Use the <code>getThen()-&gt;...-&gt;set()</code> chain with a value callback or filter if you just want to transform a value.</li>
+</ul>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>  
+</div>
+
+<footer>
+<div class="pager">
+  <a href="defined-vars.html" class="prev defined-vars">&laquo;Getting Variables</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="conditionals.html" class="next conditionals">Conditionals&raquo;</a>
+</div>
+
+
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.0.28 &bull; Last Updated: Tue, 30 May 2017 18:04:18 -0700</p>
+  </div>
+</footer>
+
+<script>
+$(document).ready(function() {
+  $('#tipue_search_input').tipuesearch();
+});
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,158 @@
+.section {
+  background-color: transparent;
+  color: $color--black;
+  padding: 0 $gap__fixed--h * 2 0 0;
+  display: flex;
+  align-items: center;
+  border-radius: 30px;
+  line-height: 1.4;
+}
+
+.section--level0 {
+  background-color: $color--white;
+  color: level_color(0);
+  font-size: map_get($font_size, l0);
+}
+
+.section--level1 {
+  font-size: map_get($font_size, l1);
+  background-color: level_color(1);
+  color: $color--white;
+}
+
+.section--level2 {
+  font-size: map_get($font_size, l2);
+  font-weight: bold;
+}
+
+.section--level5,
+.section--level4,
+.section--level3 {
+  font-size: map_get($font_size, l3);
+  font-weight: bold;
+}
+
+.section__number {
+  margin-right: $gap__fixed--h /2;
+  font-size: 1.4em;
+  font-weight: bold;
+  width: 3rem;
+  height: 3rem;
+  line-height: 3rem;
+  text-align: center;
+  background-color: $color--white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 4px solid;
+  border-radius: 50%;
+
+  .section--level0 & {
+    color: level_color(0);
+    border-color: level_color(0);
+  }
+  .section--level1 & {
+    color: $color--black;
+    border-color: level_color(1);
+  }
+  .section--level2 & {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: .9em;
+    margin-right: $gap__fixed--h / 2;
+    color: $color--black;
+    border-color: $color--grey--lines;
+    border-width: 3px;
+  }
+  .section--level5 &,
+  .section--level4 &,
+  .section--level3 & {
+    width: auto;
+    height: auto;
+    font-size: .7em;
+    margin-right: $gap__fixed--h / 2;
+    color: $color--black;
+    border-color: $color--grey--lines;
+    border-width: 2px;
+    border-radius: 0;
+    padding: 5px;
+    background-color: $color--white;
+    color: $color--black;
+    height: auto;
+    line-height: initial;
+  }
+}
+
+.section__title {
+  white-space: nowrap;
+  display: block;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.section__path {
+  font-size: map_get($font_size, url);
+  display: block;
+  font-style: italic;
+}
+
+.section__flag {
+  margin-left: $gap__fixed--h /2;
+  border-radius: 50%;
+  width: 1.6em;
+  height: 1.6em;
+  font-family: map_get($font, flag);
+  font-size: map_get($font_size, flag);
+  font-weight: normal;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  background-color: $color--grey--lines;
+  color: $color--black;
+
+  .type--modal & {
+    color: nth(map_get($color--flags, 'modal'), 1);
+    background-color: nth(map_get($color--flags, 'modal'), 2);
+  }
+  .type--download & {
+    color: nth(map_get($color--flags, 'download'), 1);
+    background-color: nth(map_get($color--flags, 'download'), 2);
+  }
+  .type--link & {
+    color: nth(map_get($color--flags, 'link'), 1);
+    background-color: nth(map_get($color--flags, 'link'), 2);
+  }
+  .type--external & {
+    color: nth(map_get($color--flags, 'external'), 1);
+    background-color: nth(map_get($color--flags, 'external'), 2);
+  }
+  .type--form & {
+    color: nth(map_get($color--flags, 'form'), 1);
+    background-color: nth(map_get($color--flags, 'form'), 2);
+  }
+  .type--content & {
+    color: nth(map_get($color--flags, 'content'), 1);
+    background-color: nth(map_get($color--flags, 'content'), 2);
+  }
+}
+
+.section__privileged {
+  margin-left: $gap__fixed--h--narrow;
+  display: flex;
+  path {
+    fill: $color--grey;
+  }
+  .section--level1 & {
+    path {
+      fill: $color--white;
+    }
+  }
+  .section--level0 & {
+    path {
+      fill: level_color(0);
+    }
+  }
+}

@@ -1,0 +1,26 @@
+//
+//
+// Configuration partials
+//
+
+//Config
+@import 'config/vars';
+@import 'config/colors';
+@import 'config/spacing';
+//
+////Mixins
+//@import 'libs/mixins';
+
+//
+//
+// Output-producing partials
+//
+
+@import 'base/reset';
+@import 'base/elements';
+
+//Drupal
+
+//Components
+@import "components/legend";
+@import "components/section";

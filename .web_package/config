@@ -1,0 +1,10 @@
+master = "master"
+develop = "master"
+remote = origin
+create_tags = patch
+push_tags = auto
+push_master = auto
+push_develop = auto
+patch_prefix = .
+git_root = .
+info_file = composer.json

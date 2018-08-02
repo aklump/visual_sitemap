@@ -1,0 +1,37 @@
+$color--black: #333;
+$color--white: #fff;
+$color--grey: #a5b1c2;
+$color--grey--lines: #ddd;
+$color--blue: #4b6584;
+$color--blue--dark: darken($color--blue, 15%);
+
+// Semantic colors.
+$color--top: $color--blue--dark;
+$color--headings: $color--blue;
+
+$color--level: (
+        $color--blue,
+        $color--blue,
+        $color--blue,
+        $color--blue,
+        $color--blue,
+        $color--blue,
+        $color--blue,
+        $color--blue,
+        $color--blue,
+        $color--blue,
+        $color--blue,
+);
+
+$color--flags: (
+        external: ($color--white, #fc5c65),
+        content: ($color--black, #fd9644),
+        download: ($color--white, #2bcbba),
+        form: ($color--white, #a55eea),
+        link: ($color--white, #2d98da),
+        modal: ($color--black, #fed330),
+);
+
+@function level_color($level) {
+  @return nth($color--level, $level + 1);
+}

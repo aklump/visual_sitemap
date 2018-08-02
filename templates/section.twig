@@ -1,0 +1,11 @@
+<div class="section section--level{{ level }} type--{{ type }}">
+  <span class="section__number">{{ section }}</span>
+  <div>
+    <span class="section__title"><span>{{ title }}</span>{%
+        if privileged %}<span class="section__privileged">{{ privileged|raw
+      }}</span>{%        endif
+      %}{% if flag %}<span
+          class="section__flag"><span>{{ flag }}</span></span>{% endif %}</span>
+    <span class="section__path">{{ path }}</span>
+  </div>
+</div>
