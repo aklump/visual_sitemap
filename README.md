@@ -2,7 +2,9 @@
 
 ## Summary
 
-Using a very simple JSON file schema to define the structure of your website, this project uses that structure to generate a beautiful, visual HTML sitemap.  The final document has all icons and CSS embedded in it and can be shared with other teammembers easily.  The primary fonts use Google Fonts and require internet access, however the fallback fonts work just fine offline.
+Using a very simple JSON file schema to define the structure of your website, this project uses that structure to generate a beautiful, visual HTML sitemap.  The final document has all icons and CSS embedded in it and can be shared with other team members easily.  The primary fonts use Google Fonts and require internet access, however the fallback fonts work just fine offline.
+
+Take a look at _example.json_ to see what a definition file looks like.
 
 ## Installation
 
