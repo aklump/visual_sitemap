@@ -31,7 +31,7 @@ This is a suggested installation strategy.  It assumes that _~/bin_ is in your `
 
 ## Contributing
 
-If you find this project useful... <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/aklump"><img src="https://www.buymeacoffee.com/assets/img/BMC-btn-logo.svg" alt="Buy me a coffee"><span style="margin-left:5px">Buy me a coffee</span></a> ...
+If you find this project useful... please consider [making a donation](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4E5KZHDQCEUV8).
 
 ## Best Practices
 
