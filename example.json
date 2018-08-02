@@ -166,11 +166,6 @@
                             "type": "modal"
                         },
                         {
-                            "title": "Educator Status",
-                            "path": "/user/settings#p=account_educator&sm=account-settings",
-                            "type": "modal"
-                        },
-                        {
                             "title": "Email Preferences",
                             "path": "/user/settings#p=account_newsletter&sm=account-settings",
                             "type": "modal"
