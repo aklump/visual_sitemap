@@ -89,11 +89,22 @@ class VisualSitemap {
     $this->validateDefinition();
     $build = $definition = $this->definition->getJson(TRUE);
 
+    $user_css = ROOT . '/user_templates/style.css';
+    $user_css = file_exists($user_css) ? $user_css : NULL;
+
     if ($this->mode === SELF::MODE_DEV) {
       $styles = '<link rel="stylesheet" href="file://' . ROOT . '/dist/visual_sitemap.css"/>';
+      if ($user_css) {
+        $styles .= '<link rel="stylesheet" href="file://' . $user_css . '"/>';
+      }
     }
     else {
-      $styles = '<style type="text/css">' . file_get_contents(ROOT . '/dist/visual_sitemap.css') . '</style>';
+      $styles = '<style type="text/css">';
+      $styles .= file_get_contents(ROOT . '/dist/visual_sitemap.css');
+      if ($user_css) {
+        $styles .= file_get_contents($user_css);
+      }
+      $styles .= '</style>';
     }
 
     $this->html = $this->twig->render('html.twig', [

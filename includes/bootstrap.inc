@@ -26,7 +26,10 @@ if (empty($json)) {
   throw new \RuntimeException("Invalid JSON in configuration file: $definition_file");
 }
 
-$twig = new Twig_Environment(new Twig_Loader_Filesystem(ROOT . '/templates'));
+$twig = new Twig_Environment(new Twig_Loader_Filesystem([
+  ROOT . '/user_templates',
+  ROOT . '/templates',
+]));
 
 $vismap = new VisualSitemap(
   $definition,

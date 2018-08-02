@@ -91,6 +91,11 @@ The following are the valid section _types_.  You may omit the `type` and `page`
 
 Path should be a relative link and begin with `/`.  Not all resources should use `path`.
 
+## Theming
+
+You may override the default templates by placing your own in user_templates.  So if wanted to refactor _html.twig_ then first copy it to _user_templates/html.twig_ and then modify as desired.
+
+For user styles, add a file called _user_templates/style.css_ and it will be included in the sitemap. 
 
 ## Development
 
