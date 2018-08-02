@@ -18,6 +18,11 @@ This is a suggested installation strategy.  It assumes that _~/bin_ is in your `
     cd ~/bin && ln -s ~/opt/visual_sitemap/vismap
     cd ~/bin && ln -s ~/opt/visual_sitemap/vismapwatch
 
+## Tools
+
+1. You will need a text editor to edit JSON files.
+1. You will need a command line terminal to generate the map.
+
 ## Usage
 
 1. Create a JSON file following the pattern in _example.json_.  You can also refer to _schema.json_, which uses [JSON Schema](https://spacetelescope.github.io/understanding-json-schema/index.html) to define the format.
