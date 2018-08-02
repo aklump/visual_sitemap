@@ -5,19 +5,16 @@
  * @file
  * Controller for the visual sitemap.
  */
+use AKlump\LoftLib\Component\Bash\Color;
 
 define('ROOT', dirname(__FILE__));
 require_once ROOT . '/vendor/autoload.php';
 
-use AKlump\LoftLib\Component\Storage\FilePath;
-use AKlump\VisualSitemap\VisualSitemap;
-
 try {
   require ROOT . '/includes/bootstrap.inc';
-
   $vismap->generate()->save();
 }
 catch (\Exception $exception) {
-  print $exception->getMessage() . PHP_EOL . PHP_EOL;
+  echo Color::wrap('red', $exception->getMessage() . PHP_EOL);
   exit(1);
 }

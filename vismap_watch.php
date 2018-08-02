@@ -52,6 +52,6 @@ try {
   $watcher->start($poll_interval * 1000000);
 }
 catch (\Exception $exception) {
-  print $exception->getMessage() . PHP_EOL . PHP_EOL;
+  echo Color::wrap('red', $exception->getMessage() . PHP_EOL);
   exit(1);
 }
