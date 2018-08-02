@@ -28,6 +28,7 @@ This is a suggested installation strategy.  It assumes that _~/bin_ is in your `
 1. Create a JSON file following the pattern in _example.json_.  You can also refer to _schema.json_, which uses [JSON Schema](https://spacetelescope.github.io/understanding-json-schema/index.html) to define the format.
 1. Generate an HTML version once by running the following command: `vismap sitemap.json`.  _sitemap.html_ will be created.  If _sitemap.html_ already exists, you will need to use the `-f` flag to overwrite it, e.g. `vismap sitemap.json -f`.
 1. As you make changes to the JSON file, you may automatically generate the sitemap using `vismapwatch sitemap.json`, again, use the `-f` flag if the HTML file already exists.
+1. Use the `--out={filepath}` to control the output location **relative to the source file**.  You may also use an absolute path beginning with a `/`.
 
 ## Contributing
 
@@ -44,6 +45,7 @@ The schema is very simple, a nested group of objects, each following this patter
 
     {
         "title": "",
+        "more": "",
         "type": "",
         "path": "",
         "sections": []
@@ -65,11 +67,13 @@ The `sections` is where you nest the nodes, like this:
         "sections": [
             {
                 "title": "",
+                "more": "",
                 "type": "",
                 "path": "",
                 "sections": [
                     {
                         "title": "",
+                        "more": "",
                         "type": "",
                         "path": "",
                         "sections": []
@@ -78,6 +82,7 @@ The `sections` is where you nest the nodes, like this:
             },
             {
                 "title": "",
+                "more": "",
                 "type": "",
                 "path": "",
                 "sections": []
@@ -109,6 +114,6 @@ For user styles, add a file called _user_templates/style.css_ and it will be inc
 
 You may add other files as desired to _user_templates_ without harm.
 
-## Development
+## Advanced
 
 * Use the `--dev` flag during development.  This will embed the CSS as a stylesheet link and prevent having to regenerate when making CSS changes.

@@ -38,6 +38,9 @@ $vismap = new VisualSitemap(
 );
 
 // Do not overwrite without the -f flag.
+if ($output = $cli->getParam('out')) {
+  $vismap->setOutputFilePath($output);
+}
 $output_path = $vismap->getOutputFilePath();
 if (file_exists($output_path) && !$cli->hasFlag('f')) {
   throw new \RuntimeException("Output file \"" . basename($output_path) . "\" already exists, use the -f flag to overwrite.");

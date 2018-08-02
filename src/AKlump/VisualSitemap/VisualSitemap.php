@@ -27,6 +27,8 @@ class VisualSitemap {
 
   protected $mode;
 
+  protected $outputFilePath;
+
   /**
    * VisualSitemap constructor.
    *
@@ -40,7 +42,7 @@ class VisualSitemap {
    * @throws \Twig_Error_Runtime
    */
   public function __construct(FilePath $definition, Twig_Environment $twig, FilePath $schema) {
-    $this->definition = $definition->load();
+    $this->definition = FilePath::create(realpath($definition->getPath()))->load();
     $this->schema = $schema->load();
     $this->twig = $twig;
     $this->twig->getExtension('Twig_Extension_Core')
@@ -248,17 +250,11 @@ class VisualSitemap {
   /**
    * Save the generated file to disk.
    *
-   * @param \AKlump\LoftLib\Component\Storage\FilePath $output_file
-   *   The filepath to output to.
-   *
    * @return \AKlump\VisualSitemap\VisualSitemap
    *   An instance of self for chaining.
    */
-  public function save(FilePath $output_file = NULL) {
-    if (!isset($output_file)) {
-      $output_file = new FilePath($this->getOutputFilePath());
-    }
-    $output_file->put($this->html)->save();
+  public function save() {
+    FilePath::create($this->getOutputFilePath())->put($this->html)->save();
 
     return $this;
   }
@@ -270,7 +266,24 @@ class VisualSitemap {
    *   The filepath to the default output file.
    */
   public function getOutputFilePath() {
-    return $this->definition->getDirName() . '/' . $this->definition->getFilename() . '.html';
+    return empty($this->outputFilePath) ? $this->definition->getDirName() . '/' . $this->definition->getFilename() . '.html' : $this->outputFilePath;
+  }
+
+  /**
+   * Set a custom output filepath.
+   *
+   * @param string $filepath
+   *   The filepath for output.
+   *
+   * @return $this
+   */
+  public function setOutputFilePath($filepath) {
+    if (substr($filepath, 0, 1) !== '/') {
+      $filepath = rtrim($this->definition->getDirName(), '/') . "/$filepath";
+    }
+    $this->outputFilePath = $filepath;
+
+    return $this;
   }
 
   /**
