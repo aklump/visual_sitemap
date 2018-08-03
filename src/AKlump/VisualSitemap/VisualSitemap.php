@@ -29,6 +29,8 @@ class VisualSitemap {
 
   protected $outputFilePath;
 
+  protected $baseUrl;
+
   /**
    * VisualSitemap constructor.
    *
@@ -42,7 +44,9 @@ class VisualSitemap {
    * @throws \Twig_Error_Runtime
    */
   public function __construct(FilePath $definition, Twig_Environment $twig, FilePath $schema) {
-    $this->definition = FilePath::create(realpath($definition->getPath()))->load();
+    $this->definition = FilePath::create(realpath($definition->getPath()))
+      ->load();
+    $this->baseUrl = ($data = $this->definition->getJson()) && isset($data->baseUrl) ? rtrim($data->baseUrl) : NULL;
     $this->schema = $schema->load();
     $this->twig = $twig;
     $this->twig->getExtension('Twig_Extension_Core')
@@ -174,7 +178,13 @@ class VisualSitemap {
       }),
       'title' => $title = $this->g->get($definition, 'title'),
       'path' => $this->g->get($definition, 'path'),
-      'more' => $this->g->get($definition, 'more'),
+      'more' => $this->g->get($definition, 'more', NULL, function ($more) use ($definition) {
+        return empty($more) ? $more : $this->twigRenderString($more, [
+          'base' => $this->baseUrl,
+          'path' => ($path = $this->g->get($definition, 'path')),
+          'url' => $this->baseUrl . $path,
+        ]);
+      }),
       'section' => $this->g->get($definition, 'section', '', function ($value, $default) use ($title) {
         return empty($value) ? strtoupper(substr($title, 0, 1)) : $value;
       }),

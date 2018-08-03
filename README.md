@@ -55,6 +55,7 @@ The schema is very simple, a nested group of objects, each following this patter
 
 The top-level node only, takes the following additional keys:
 
+* `baseUrl` Used to generate URL tokens.
 * `footer` Optional footer text.
 * `subtitle` Optional subtitle.
 * `timezone` The timezone name to localize to.
@@ -108,7 +109,13 @@ Path should be a relative link and begin with `/`.  Not all resources should use
 
 ### More (Info)
 
-Optional, URL hyperlink to anything that provides more info for the section, a Trello card, website, documentation, etc.  This makes the title clickable.
+Optional, URL hyperlink to anything that provides more info for the section, a Trello card, website, documentation, etc.  This makes the title clickable.  You may use tokens in this field, the following are available:
+
+| token | description |
+|----------|----------|
+| {{ url }} | An absolute URL generated using the baseUrl and the `path` of the section  |
+| {{ path }} | The `path` of the section  |
+| {{ base }} | The value of the baseUrl configuration variable |
 
 ## Theming
 

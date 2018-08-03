@@ -57,6 +57,9 @@
         "footer": {
             "type": "string"
         },
+        "baseUrl": {
+            "type": "string"
+        },
         "timezone": {
             "type": "string"
         },
@@ -70,6 +73,7 @@
     "additionalProperties": false,
     "required": [
         "title",
-        "timezone"
+        "timezone",
+        "baseUrl"
     ]
 }
