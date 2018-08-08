@@ -1,0 +1,29 @@
+{
+    "title": "PROJECT_NAME",
+    "subtitle": "Visual Sitemap &bull; {{ \"now\"|date('F j, Y') }}",
+    "footer": "OPTIONAL_FOOTER_TEXT",
+    "timezone": "America/Los_Angeles",
+    "baseUrl": "WEBSITE_URL",
+    "sections": [
+        {
+            "title": "DOMAIN_NAME",
+            "sections": [
+                {
+                    "title": "Frontpage",
+                    "more": "{{ url }}",
+                    "path": "/"
+                },
+                {
+                    "title": "ANOTHER_PAGE",
+                    "more": "{{ url }}",
+                    "path": "/page2"
+                },
+                {
+                    "title": "ANOTHER_PAGE_YET",
+                    "more": "{{ url }}",
+                    "path": "/page3"
+                }
+            ]
+        }
+    ]
+}

@@ -10,13 +10,25 @@ Take a look at _example.json_ to see what a definition file looks like.
 
 Open _example.html_ in a browser to see the example visual sitemap.
 
+## Quick Start
+
+- Once you've installed _vismap_, copy and rename the file _quick_start.json_.
+- Replace the contents of that file with real content.
+- In Terminal type `vismap /PATH/TO/YOUR/FILE.json`
+- Open _/PATH/TO/YOUR/FILE.html_ in a browser.
+
 ## Installation
 
-This is a suggested installation strategy.  It assumes that _~/bin_ is in your `$PATH` BASH variable.
+1. This is a suggested installation strategy.  It assumes that _~/bin_ is in your `$PATH` BASH variable.
 
-    cd ~/opt && git clone https://github.com/aklump/visual_sitemap.git visual_sitemap
-    cd ~/bin && ln -s ~/opt/visual_sitemap/vismap
-    cd ~/bin && ln -s ~/opt/visual_sitemap/vismapwatch
+        cd ~/opt && git clone https://github.com/aklump/visual_sitemap.git visual_sitemap
+        cd ~/bin && ln -s ~/opt/visual_sitemap/vismap
+        cd ~/bin && ln -s ~/opt/visual_sitemap/vismapwatch
+
+1. Test your installation by typing `vismap` in your terminal, you should see:
+
+        Argument 1 must point to a configuration json file.
+
 
 ## Tools
 
