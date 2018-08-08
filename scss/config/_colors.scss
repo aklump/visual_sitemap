@@ -4,6 +4,7 @@ $color--grey: #a5b1c2;
 $color--grey--lines: #ddd;
 $color--blue: #4b6584;
 $color--blue--dark: darken($color--blue, 15%);
+$color--orange: #fd9644;
 
 // Semantic colors.
 $color--top: $color--blue--dark;
@@ -25,7 +26,7 @@ $color--level: (
 
 $color--flags: (
         external: ($color--white, #fc5c65),
-        content: ($color--black, #fd9644),
+        content: ($color--black, $color--orange),
         download: ($color--white, #2bcbba),
         form: ($color--white, #a55eea),
         link: ($color--white, #2d98da),
