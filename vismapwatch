@@ -24,7 +24,7 @@ try {
     echo '.';
     try {
       Bash::exec([
-        ROOT . '/vismap.php',
+        ROOT . '/vismap',
         $definition_file,
         $cli->hasFlag('f') ? '-f' : '',
         $cli->hasParam('out') ? '--out=' . $cli->getParam('out') : '',
@@ -41,7 +41,7 @@ try {
   echo '.';
   try {
     Bash::exec([
-      ROOT . '/vismap.php',
+      ROOT . '/vismap',
       $definition_file,
       $cli->hasFlag('f') ? '-f' : '',
       $cli->hasParam('out') ? '--out=' . $cli->getParam('out') : '',
