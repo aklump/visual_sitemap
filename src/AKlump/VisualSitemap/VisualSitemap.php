@@ -3,7 +3,7 @@
 namespace AKlump\VisualSitemap;
 
 use AKlump\Data\Data;
-use AKlump\LoftLib\Component\Storage\FilePath;
+use AKlump\LoftLib\Storage\FilePath;
 use JsonSchema\Constraints\Constraint;
 use JsonSchema\Validator;
 use Twig_Environment;

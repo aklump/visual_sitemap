@@ -9,8 +9,8 @@
 define('ROOT', dirname(__FILE__));
 require_once ROOT . '/vendor/autoload.php';
 
-use AKlump\LoftLib\Component\Bash\Bash;
-use AKlump\LoftLib\Component\Bash\Color;
+use AKlump\LoftLib\Bash\Bash;
+use AKlump\LoftLib\Bash\Color;
 use Illuminate\Filesystem\Filesystem;
 use JasonLewis\ResourceWatcher\Tracker;
 use JasonLewis\ResourceWatcher\Watcher;

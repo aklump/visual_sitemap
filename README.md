@@ -21,7 +21,7 @@ Open _example.html_ in a browser to see the example visual sitemap.
 
 ### Install Using Composer
 
-    composer global require aklump/visual_sitemap
+    composer global require aklump/visual-sitemap
 
 ### Install Using Git
 
