@@ -5,8 +5,8 @@
  * Header to use in controllers to validate CLI arguments.
  */
 
-use AKlump\LoftLib\Component\Bash\Bash;
-use AKlump\LoftLib\Component\Storage\FilePath;
+use AKlump\LoftLib\Bash\Bash;
+use AKlump\LoftLib\Storage\FilePath;
 use AKlump\VisualSitemap\VisualSitemap;
 
 $cli = new Bash($argv);

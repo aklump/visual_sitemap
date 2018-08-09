@@ -5,7 +5,8 @@
  * @file
  * Controller for the visual sitemap.
  */
-use AKlump\LoftLib\Component\Bash\Color;
+
+use AKlump\LoftLib\Bash\Color;
 
 define('ROOT', dirname(__FILE__));
 require_once ROOT . '/vendor/autoload.php';

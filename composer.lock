@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "46cdb76c8e329f4189dc0eaff793873d",
+    "content-hash": "c3e3a4efcd5bed14e5f3d43b9c08207b",
     "packages": [
         {
             "name": "aklump/data",
@@ -53,28 +53,28 @@
             "time": "2017-05-31T01:04:19+00:00"
         },
         {
-            "name": "aklump/loft_data_grids",
-            "version": "0.4.31",
+            "name": "aklump/loft-lib",
+            "version": "1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/aklump/loft_data_grids.git",
-                "reference": "52578d025514729f6c2d0d223ad6be88ce12abb3"
+                "url": "https://github.com/aklump/loft-lib.git",
+                "reference": "10f88745db76ac9a3e60e3a00277e45f09369063"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aklump/loft_data_grids/zipball/52578d025514729f6c2d0d223ad6be88ce12abb3",
-                "reference": "52578d025514729f6c2d0d223ad6be88ce12abb3",
+                "url": "https://api.github.com/repos/aklump/loft-lib/zipball/10f88745db76ac9a3e60e3a00277e45f09369063",
+                "reference": "10f88745db76ac9a3e60e3a00277e45f09369063",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.5",
-                "phpoffice/phpexcel": "~1.8",
-                "symfony/yaml": ">=2.0"
+                "illuminate/support": "~4.2.17",
+                "php": ">=5.6",
+                "ralouphie/mimey": "^1.0"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "AKlump\\LoftDataGrids\\": "src/AKlump/LoftDataGrids"
+                    "AKlump\\LoftLib\\": "src/AKlump/LoftLib/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -84,63 +84,11 @@
             "authors": [
                 {
                     "name": "Aaron Klump",
-                    "email": "sourcecode@intheloftstudios.com",
-                    "homepage": "http://www.intheloftstudios.com",
-                    "role": "Developer"
+                    "email": "sourcecode@intheloftstudios.com"
                 }
             ],
-            "description": "PHP Classes to allow data placement in a grid structure and exporting in various data formats.",
-            "homepage": "http://github.com/aklump/loft_data_grids",
-            "keywords": [
-                "csv",
-                "excel",
-                "export",
-                "spreadsheet"
-            ],
-            "time": "2018-01-30T22:26:41+00:00"
-        },
-        {
-            "name": "aklump/loft_php_lib",
-            "version": "0.6.75",
-            "dist": {
-                "type": "path",
-                "url": "./lib/loft_php_lib/dist",
-                "reference": "b9255154be7ee0b14c09b4bc4c6922e76ab13651",
-                "shasum": null
-            },
-            "require": {
-                "aklump/data": "^0.0.28",
-                "aklump/loft_data_grids": "^0.4.28",
-                "illuminate/support": "~4.2.17",
-                "php": ">=5.3.0",
-                "ralouphie/mimey": "^1.0",
-                "symfony/yaml": "^2.7"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/AKlump/LoftLib/Xml/LoftXmlElement.php"
-                ],
-                "psr-4": {
-                    "": [
-                        "src/",
-                        "tests/"
-                    ]
-                }
-            },
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "email": "sourcecode@intheloftstudios.com",
-                    "homepage": "http://www.intheloftstudios.com",
-                    "name": "Aaron Klump",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Miscellaneous PHP library classes from In the Loft Studios.",
-            "homepage": "http://www.intheloftstudios.com/packages/php/loft_php_lib"
+            "description": "Core utilities provided by In the Loft Studios",
+            "time": "2018-08-09T20:51:40+00:00"
         },
         {
             "name": "illuminate/filesystem",
@@ -343,64 +291,6 @@
             "time": "2018-02-14T22:26:30+00:00"
         },
         {
-            "name": "phpoffice/phpexcel",
-            "version": "1.8.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/PHPOffice/PHPExcel.git",
-                "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
-                "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
-                "shasum": ""
-            },
-            "require": {
-                "ext-xml": "*",
-                "ext-xmlwriter": "*",
-                "php": ">=5.2.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "PHPExcel": "Classes/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL"
-            ],
-            "authors": [
-                {
-                    "name": "Maarten Balliauw",
-                    "homepage": "http://blog.maartenballiauw.be"
-                },
-                {
-                    "name": "Mark Baker"
-                },
-                {
-                    "name": "Franck Lefevre",
-                    "homepage": "http://blog.rootslabs.net"
-                },
-                {
-                    "name": "Erik Tilt"
-                }
-            ],
-            "description": "PHPExcel - OpenXML - Read, Create and Write Spreadsheet documents in PHP - Spreadsheet engine",
-            "homepage": "http://phpexcel.codeplex.com",
-            "keywords": [
-                "OpenXML",
-                "excel",
-                "php",
-                "spreadsheet",
-                "xls",
-                "xlsx"
-            ],
-            "abandoned": "phpoffice/phpspreadsheet",
-            "time": "2015-05-01T07:00:55+00:00"
-        },
-        {
             "name": "ralouphie/mimey",
             "version": "1.0.8",
             "source": {
@@ -489,25 +379,28 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.8.0",
+            "version": "v1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "7cc359f1b7b80fc25ed7796be7d96adc9b354bae"
+                "reference": "e3d826245268269cd66f8326bd8bc066687b4a19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/7cc359f1b7b80fc25ed7796be7d96adc9b354bae",
-                "reference": "7cc359f1b7b80fc25ed7796be7d96adc9b354bae",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/e3d826245268269cd66f8326bd8bc066687b4a19",
+                "reference": "e3d826245268269cd66f8326bd8bc066687b4a19",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
+            "suggest": {
+                "ext-ctype": "For best performance"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.8-dev"
+                    "dev-master": "1.9-dev"
                 }
             },
             "autoload": {
@@ -540,20 +433,20 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2018-04-30T19:57:29+00:00"
+            "time": "2018-08-06T14:22:27+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.8.0",
+            "version": "v1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "3296adf6a6454a050679cde90f95350ad604b171"
+                "reference": "d0cd638f4634c16d8df4508e847f14e9e43168b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/3296adf6a6454a050679cde90f95350ad604b171",
-                "reference": "3296adf6a6454a050679cde90f95350ad604b171",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/d0cd638f4634c16d8df4508e847f14e9e43168b8",
+                "reference": "d0cd638f4634c16d8df4508e847f14e9e43168b8",
                 "shasum": ""
             },
             "require": {
@@ -565,7 +458,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.8-dev"
+                    "dev-master": "1.9-dev"
                 }
             },
             "autoload": {
@@ -599,57 +492,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2018-04-26T10:06:28+00:00"
-        },
-        {
-            "name": "symfony/yaml",
-            "version": "v2.8.44",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/yaml.git",
-                "reference": "fbf876678e29dc634430dcf0096e216eb0004467"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/fbf876678e29dc634430dcf0096e216eb0004467",
-                "reference": "fbf876678e29dc634430dcf0096e216eb0004467",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.9",
-                "symfony/polyfill-ctype": "~1.8"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.8-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Yaml\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Yaml Component",
-            "homepage": "https://symfony.com",
-            "time": "2018-07-26T09:03:18+00:00"
+            "time": "2018-08-06T14:22:27+00:00"
         },
         {
             "name": "twig/twig",
