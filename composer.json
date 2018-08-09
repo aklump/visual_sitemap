@@ -19,8 +19,8 @@
         }
     ],
     "require": {
-        "php": ">=7.1",
-        "twig\/twig": "^2.5",
+        "php": ">=5.6",
+        "twig\/twig": "^1.35",
         "aklump\/loft-lib": "^1.0",
         "jasonlewis\/resource-watcher": "^1.2",
         "justinrainbow\/json-schema": "^5.2",
@@ -31,7 +31,7 @@
             "AKlump\\VisualSitemap\\": "src\/AKlump\/VisualSitemap\/"
         }
     },
-    "version": "0.1.6",
+    "version": "1.0",
     "bin": [
         ".\/vismap",
         ".\/vismapwatch"

@@ -168,11 +168,12 @@ class VisualSitemap {
     // Now we are at the end of a parent/child relationship.  Render.
     $definition['level'] = $context['level'];
     $definition['section'] = implode('.', $id);
+    $definition += ['type' => 'page', 'markup' => ''];
 
     $vars = [
       'level' => $context['level'],
       'privileged' => $this->g->get($definition, 'privileged') ? $this->getIcon('lock') : '',
-      'type' => str_replace('_', '-', $definition['type'] ?? 'page'),
+      'type' => str_replace('_', '-', $definition['type']),
       'flag' => $this->g->get($definition, 'type', '', function ($value) {
         return empty($value) ? '' : strtoupper(substr($value, 0, 1));
       }),
@@ -188,7 +189,7 @@ class VisualSitemap {
       'section' => $this->g->get($definition, 'section', '', function ($value, $default) use ($title) {
         return empty($value) ? strtoupper(substr($title, 0, 1)) : $value;
       }),
-      'markup' => $definition['markup'] ?? '',
+      'markup' => $definition['markup'],
     ];
     if ($vars['level'] >= 0) {
       $definition['markup'] = $this->twig->render('section.twig', $vars);
@@ -224,6 +225,7 @@ class VisualSitemap {
    * @throws \Twig_Error_Syntax
    */
   protected function renderMap(array &$map) {
+    $map += ['markup' => ''];
     if (!isset($map['sections'])) {
       return $map['markup'];
     }
@@ -254,7 +256,7 @@ class VisualSitemap {
         'sections' => $map['sections'],
       ]);
 
-      return ($map['markup'] ?? '') . $rendered;
+      return ($map['markup']) . $rendered;
     }
   }
 
