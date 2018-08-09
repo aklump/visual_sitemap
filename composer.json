@@ -24,14 +24,14 @@
         "aklump\/loft-lib": "^1.0",
         "jasonlewis\/resource-watcher": "^1.2",
         "justinrainbow\/json-schema": "^5.2",
-        "aklump/data": "^0.0.28"
+        "aklump\/data": "^0.0.28"
     },
     "autoload": {
         "psr-4": {
             "AKlump\\VisualSitemap\\": "src\/AKlump\/VisualSitemap\/"
         }
     },
-    "version": "0.1.3",
+    "version": "0.1.4",
     "bin": [
         ".\/vismap",
         ".\/vismapwatch"
