@@ -24,6 +24,10 @@ Open _example.html_ in a browser to see the example visual sitemap.
 To be able to use the commands from any directory in your CLI you may want to install this globally.
 
     composer global require aklump/visual-sitemap
+    
+If you haven't done this previously you must modify your  _~/.bash_profile_ (or _~/.bashrc_) to include the composer directory; something like this:
+                                 
+    export PATH=~/.composer/vendor/bin:$PATH
 
 ### Install Per Project Using Composer
 
