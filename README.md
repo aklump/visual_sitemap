@@ -19,25 +19,26 @@ Open _example.html_ in a browser to see the example visual sitemap.
 
 ## Installation
 
-### Install Using Composer
+### Install Globally Using Composer
+
+To be able to use the commands from any directory in your CLI you may want to install this globally.
 
     composer global require aklump/visual-sitemap
 
-### Install Using Git
+### Install Per Project Using Composer
 
-1. This is a suggested installation strategy.  It assumes that _~/bin_ is in your `$PATH` BASH variable.
+    cd /your/project/folder
+    composer require aklump/visual-sitemap
 
-        cd ~/opt && git clone https://github.com/aklump/visual_sitemap.git visual_sitemap
-        cd ~/bin && ln -s ~/opt/visual_sitemap/vismap
-        cd ~/bin && ln -s ~/opt/visual_sitemap/vismapwatch
+### Testing installation    
 
 1. Test your installation by typing `vismap` in your terminal, you should see:
 
         Argument 1 must point to a configuration json file.
 
-
 ## Tools
 
+1. You will need [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) for installing.
 1. You will need a text editor to edit JSON files.
 1. You will need a command line terminal to generate the map.
 
