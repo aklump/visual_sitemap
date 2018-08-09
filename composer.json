@@ -36,5 +36,9 @@
             "url": ".\/lib\/loft_php_lib\/dist"
         }
     ],
-    "version": "0.1.2"
+    "version": "0.1.2",
+    "bin": [
+        "./vismap",
+        "./vismapwatch"
+    ]
 }

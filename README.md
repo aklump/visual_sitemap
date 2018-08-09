@@ -19,6 +19,12 @@ Open _example.html_ in a browser to see the example visual sitemap.
 
 ## Installation
 
+### Install Using Composer
+
+    composer global require aklump/visual_sitemap
+
+### Install Using Git
+
 1. This is a suggested installation strategy.  It assumes that _~/bin_ is in your `$PATH` BASH variable.
 
         cd ~/opt && git clone https://github.com/aklump/visual_sitemap.git visual_sitemap
