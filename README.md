@@ -24,8 +24,10 @@ Open _example.html_ in a browser to see the example visual sitemap.
 To be able to use the commands from any directory in your CLI you may want to install this globally.
 
     composer global require aklump/visual-sitemap
+
+Make sure you have the composer bin dir in your `PATH`. The default value is _~/.composer/vendor/bin_, but you can check the value that you need to use by running `composer global config bin-dir --absolute`.
     
-If you haven't done this previously you must modify your  _~/.bash_profile_ (or _~/.bashrc_) to include the composer directory; something like this:
+To check this you must open _~/.bash_profile_ (or _~/.bashrc_); you're looking for a line that looks like the following, if you can't find, you'll need to add it.
                                  
     export PATH=~/.composer/vendor/bin:$PATH
 
@@ -60,7 +62,6 @@ If you find this project useful... please consider [making a donation](https://w
 ## Best Practices
 
 1. Do not change the order of items in the JSON file, unless you intend to change the section numbers associated with the items.  That is to say, always append new items to the end of a section array.  Failure to follow this point will result in your section numbers being reassigned to different sections.
-
 
 ## Schema
 
@@ -142,12 +143,21 @@ Optional, URL hyperlink to anything that provides more info for the section, a T
 
 ## Theming
 
-You may override the default templates by placing your own in _user_templates_.  So if wanted to refactor _html.twig_ then first copy it to _user_templates/html.twig_ and then modify as desired.
+You may override the default templates by creating your own overrides directory.  So if wanted to refactor _html.twig_ then first copy it to _YOUR_THEME_DIR/html.twig_ and then modify as desired.
 
-For user styles, add a file called _user_templates/style.css_ and it will be included in the sitemap. 
+For user styles, add a file called _style.css_ to the same directory and it will be included in the sitemap.
 
-You may add other files as desired to _user_templates_ without harm.
+For these themes to be discovered you must pass the `--theme=/PATH/TO/DIRECTORY` parameter, e.g.
 
-## Advanced
+    . /vendor/bin/vismap website.json --theme=templates
 
-* Use the `--dev` flag during development.  This will embed the CSS as a stylesheet link and prevent having to regenerate when making CSS changes.
+In the above example you will have a directory structure something like the following, and you have installed Visual Sitemap at the project level.  _website.json_ is your config file.  You have created your own theme and styles in _templates_.
+
+    .
+    ├── templates
+    │   ├── html.twig
+    │   └── style.css
+    ├── vendor
+    │   └── bin
+    │       └── vismap
+    └── website.json
