@@ -1,6 +1,7 @@
 /lib/loft_php_lib/*
 !/lib/loft_php_lib/dist
-/quick_start.html
+/quick_start.*
+!/quick_start.json
 /vendor
 /user_templates/*
 !/user_templates/.gitkeep
