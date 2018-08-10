@@ -44,7 +44,9 @@ try {
       ROOT . '/vismap',
       $definition_file,
       $cli->hasFlag('f') ? '-f' : '',
+      $cli->hasParam('dev') ? '--dev=' . $cli->getParam('dev') : '',
       $cli->hasParam('out') ? '--out=' . $cli->getParam('out') : '',
+      $cli->hasParam('theme') ? '--theme=' . $cli->getParam('theme') : '',
     ]);
   }
   catch (\Exception $exception) {
