@@ -30,7 +30,6 @@ if ($cli->hasFlag('v')) {
   exit(0);
 }
 
-
 $definition_file = $cli->getArg(1);
 
 if (empty($definition_file)) {
@@ -50,8 +49,8 @@ if (empty($json)) {
 // Template discovery.
 $templates = [];
 $user_templates = NULL;
-if ($cli->hasParam('templates')) {
-  $templates[] = $user_templates = realpath($cli->getParam('templates'));
+if ($cli->hasParam('theme')) {
+  $templates[] = $user_templates = realpath($cli->getParam('theme'));
 }
 $templates[] = ROOT . '/templates';
 
