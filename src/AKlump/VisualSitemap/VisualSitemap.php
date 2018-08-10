@@ -354,4 +354,16 @@ class VisualSitemap {
     ];
   }
 
+  /**
+   * Get credits and version.
+   *
+   * @return string
+   *   A string containing the title, author and version.
+   */
+  public static function getCredits() {
+    $data = FilePath::create(ROOT . '/composer.json')->load()->getJson();
+
+    return sprintf("Visual Sitemap by In the Loft Studios ~ Version %s", $data->version);
+  }
+
 }

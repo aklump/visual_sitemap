@@ -8,6 +8,7 @@
 use AKlump\LoftLib\Bash\Bash;
 use AKlump\LoftLib\Storage\FilePath;
 use AKlump\VisualSitemap\VisualSitemap;
+use AKlump\LoftLib\Bash\Color;
 
 // Check for vismap installed as composer global package.
 if (file_exists(__DIR__ . '/../../../autoload.php')) {
@@ -22,6 +23,14 @@ else {
 }
 
 $cli = new Bash($argv);
+
+// Display the version.
+if ($cli->hasFlag('v')) {
+  echo Color::wrap('cyan', VisualSitemap::getCredits()) . PHP_EOL;
+  exit(0);
+}
+
+
 $definition_file = $cli->getArg(1);
 
 if (empty($definition_file)) {
@@ -68,3 +77,5 @@ if (file_exists($output_path) && !$cli->hasFlag('f')) {
 if ($cli->hasParam('dev')) {
   $vismap->setMode(VisualSitemap::MODE_DEV);
 }
+
+
