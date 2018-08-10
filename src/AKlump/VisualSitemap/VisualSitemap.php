@@ -268,13 +268,17 @@ class VisualSitemap {
   /**
    * Save the generated file to disk.
    *
-   * @return \AKlump\VisualSitemap\VisualSitemap
-   *   An instance of self for chaining.
+   * @return array
+   *   An array of the files that were saved.
    */
   public function save() {
-    FilePath::create($this->getOutputFilePath())->put($this->html)->save();
+    $files_saved = [];
+    $files_saved[] = FilePath::create($this->getOutputFilePath())
+      ->put($this->html)
+      ->save()
+      ->getPath();
 
-    return $this;
+    return $files_saved;
   }
 
   /**
