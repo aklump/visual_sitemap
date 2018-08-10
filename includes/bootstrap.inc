@@ -38,15 +38,21 @@ if (empty($json)) {
   throw new \RuntimeException("Invalid JSON in configuration file: $definition_file");
 }
 
-$twig = new Twig_Environment(new Twig_Loader_Filesystem([
-  ROOT . '/user_templates',
-  ROOT . '/templates',
-]));
+// Template discovery.
+$templates = [];
+$user_templates = NULL;
+if ($cli->hasParam('templates')) {
+  $templates[] = $user_templates = realpath($cli->getParam('templates'));
+}
+$templates[] = ROOT . '/templates';
+
+$twig = new Twig_Environment(new Twig_Loader_Filesystem($templates));
 
 $vismap = new VisualSitemap(
   $definition,
   $twig,
-  FilePath::create(ROOT . '/schema.json')
+  FilePath::create(ROOT . '/schema.json'),
+  $user_templates
 );
 
 // Do not overwrite without the -f flag.

@@ -31,6 +31,8 @@ class VisualSitemap {
 
   protected $baseUrl;
 
+  protected $userTemplates;
+
   /**
    * VisualSitemap constructor.
    *
@@ -40,10 +42,12 @@ class VisualSitemap {
    *   The twig environment.
    * @param \AKlump\LoftLib\Component\Storage\FilePath $schema
    *   The filepath to the JSON schema file.
+   * @param string $user_templates
+   *   The filepath to the user templates directory.
    *
    * @throws \Twig_Error_Runtime
    */
-  public function __construct(FilePath $definition, Twig_Environment $twig, FilePath $schema) {
+  public function __construct(FilePath $definition, Twig_Environment $twig, FilePath $schema, $user_templates) {
     $this->definition = FilePath::create(realpath($definition->getPath()))
       ->load();
     $this->baseUrl = ($data = $this->definition->getJson()) && isset($data->baseUrl) ? rtrim($data->baseUrl) : NULL;
@@ -52,6 +56,7 @@ class VisualSitemap {
     $this->twig->getExtension('Twig_Extension_Core')
       ->setTimezone($this->definition->getJson()->timezone);
     $this->g = new Data();
+    $this->userTemplates = rtrim($user_templates, '/');
     $this->setMode();
   }
 
