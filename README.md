@@ -50,9 +50,14 @@ To check this you must open _~/.bash_profile_ (or _~/.bashrc_); you're looking f
 
 ## Usage
 
-1. Create a JSON file following the pattern in _example.json_.  You can also refer to _schema.json_, which uses [JSON Schema](https://spacetelescope.github.io/understanding-json-schema/index.html) to define the format.
+1. Create the configuration JSON file following the schema.  Use _example.json_ and _quick_start.json_ as guides.  If you wish to use the CLI to create the file (which copies and renames _quick_start.json_) do the following:
+        
+        cd /the/dir/to/contain/the/config
+        vismap FILENAME.json -c
+        
+1. You can also refer to _schema.json_, which uses [JSON Schema](https://spacetelescope.github.io/understanding-json-schema/index.html) to define the format of the configuration file.
 1. Generate an HTML version once by running the following command: `vismap sitemap.json`.  _sitemap.html_ will be created.  If _sitemap.html_ already exists, you will need to use the `-f` flag to overwrite it, e.g. `vismap sitemap.json -f`.
-1. As you make changes to the JSON file, you may automatically generate the sitemap using `vismapwatch sitemap.json`, again, use the `-f` flag if the HTML file already exists.
+1. A file watch command is availabe.  As you make changes to the JSON file, the sitemap will automatically be re-generated.  Use `vismapwatch sitemap.json` for this.  Again, use the `-f` flag if the HTML file already exists.
 1. Use the `--out={filepath}` to control the output location **relative to the source file**.  You may also use an absolute path beginning with a `/`.
 
 ## Contributing

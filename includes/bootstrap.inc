@@ -6,9 +6,9 @@
  */
 
 use AKlump\LoftLib\Bash\Bash;
+use AKlump\LoftLib\Bash\Color;
 use AKlump\LoftLib\Storage\FilePath;
 use AKlump\VisualSitemap\VisualSitemap;
-use AKlump\LoftLib\Bash\Color;
 
 // Check for vismap installed as composer global package.
 if (file_exists(__DIR__ . '/../../../autoload.php')) {
@@ -36,11 +36,28 @@ if (empty($definition_file)) {
   throw new \RuntimeException("Argument 1 must point to a configuration json file.");
 }
 
-if (!file_exists($definition_file)) {
-  throw new \RuntimeException("Definition file does not exist: $definition_file");
+$definition = FilePath::create($definition_file);
+$basename = $definition->getBasename();
+if (!$definition->exists()) {
+  if (!$cli->hasFlag('c')) {
+    throw new \RuntimeException("Definition file does not exist: \"$basename\"; use -c to create it.");
+  }
+  else {
+
+    // Uses quick_start.json as the template.
+    $template = FilePath::create(ROOT . '/quick_start.json');
+    $definition->copyFrom($template);
+    if ($definition->exists()) {
+      echo Color::wrap('green', "\"$definition_file\" has been created.") . PHP_EOL;
+      exit(0);
+    }
+    throw new \RuntimeException("Could not create \"$basename\"");
+  }
+}
+elseif ($cli->hasFlag('c')) {
+  throw new \RuntimeException("You may not use -c when \"$basename\" already exists.");
 }
 
-$definition = FilePath::create($definition_file);
 $json = $definition->load()->getJson(TRUE);
 if (empty($json)) {
   throw new \RuntimeException("Invalid JSON in configuration file: $definition_file");
