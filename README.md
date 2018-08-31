@@ -12,10 +12,10 @@ Open _example.html_ in a browser to see the example visual sitemap.
 
 ## Quick Start
 
-- Once you've installed _vismap_, copy and rename the file _quick_start.json_.
+- Once you've installed _vismap_, create a new data file thus `vismap {FILENAME}.json -c`
 - Replace the contents of that file with real content.
-- In Terminal type `vismap /PATH/TO/YOUR/FILE.json`
-- Open _/PATH/TO/YOUR/FILE.html_ in a browser.
+- In Terminal type `vismap {FILENAME}.json` to compile the sitemap.
+- Open _{FILENAME}.html_ in a browser.
 
 ## Installation
 
