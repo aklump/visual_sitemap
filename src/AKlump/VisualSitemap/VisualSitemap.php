@@ -3,6 +3,7 @@
 namespace AKlump\VisualSitemap;
 
 use AKlump\Data\Data;
+use AKlump\LoftLib\Code\ObjectCacheTrait;
 use AKlump\LoftLib\Storage\FilePath;
 use JsonSchema\Constraints\Constraint;
 use JsonSchema\Validator;
@@ -12,6 +13,8 @@ use Twig_Environment;
  * A class to create visual sitemaps.
  */
 class VisualSitemap {
+
+  use ObjectCacheTrait;
 
   const MODE_DEV = 1;
 
@@ -33,6 +36,8 @@ class VisualSitemap {
 
   protected $userTemplates;
 
+  protected $state;
+
   /**
    * VisualSitemap constructor.
    *
@@ -47,7 +52,7 @@ class VisualSitemap {
    *
    * @throws \Twig_Error_Runtime
    */
-  public function __construct(FilePath $definition, Twig_Environment $twig, FilePath $schema, $user_templates) {
+  public function __construct(FilePath $definition, Twig_Environment $twig, FilePath $schema, $user_templates, $state = NULL) {
     $this->definition = FilePath::create(realpath($definition->getPath()))
       ->load();
     $this->baseUrl = ($data = $this->definition->getJson()) && isset($data->baseUrl) ? rtrim($data->baseUrl) : NULL;
@@ -58,6 +63,7 @@ class VisualSitemap {
     $this->g = new Data();
     $this->userTemplates = rtrim($user_templates, '/');
     $this->setMode();
+    $this->state = $state;
   }
 
   /**
@@ -99,6 +105,7 @@ class VisualSitemap {
   public function generate() {
     $this->validateDefinition();
     $build = $definition = $this->definition->getJson(TRUE);
+    $states = $this->getAllStates($definition);
 
     $user_css = ROOT . '/user_templates/style.css';
     $user_css = file_exists($user_css) ? $user_css : NULL;
@@ -120,6 +127,7 @@ class VisualSitemap {
 
     $this->html = $this->twig->render('html.twig', [
       'title' => $definition['title'],
+      'states' => $states,
       'footer' => $definition['footer'],
       'styles' => $styles,
       'subtitle' => $this->twigRenderString($definition['subtitle']),
@@ -131,6 +139,34 @@ class VisualSitemap {
     ]);
 
     return $this;
+  }
+
+  /**
+   * Return all distinct states present in the definition.
+   *
+   * @param array $definition
+   *   The sitemap definition.
+   * @param array $states
+   *   Used for internal recursion tracking only.
+   *
+   * @return array
+   *   All unique states.
+   */
+  public static function getAllStates(array $definition, array &$states = []) {
+
+    if (isset($definition['state'])) {
+      $states = array_merge($states, explode(' ', $definition['state']));
+    }
+
+    if (isset($definition['sections'])) {
+      foreach ($definition['sections'] as $section) {
+        static::getAllStates($section, $states);
+      }
+    }
+
+    return array_filter(array_unique($states), function ($state) {
+      return $state != '*';
+    });
   }
 
   /**
@@ -149,6 +185,11 @@ class VisualSitemap {
    * @throws \Twig_Error_Syntax
    */
   protected function preprocess(array &$definition, array $context = []) {
+    if (!($all_states = $this->getCached('states'))) {
+      $all_states = $this->getAllStates($definition);
+      $this->setCached('states', $all_states);
+    }
+
     $context += [
       'level' => -2,
       'theme' => NULL,
@@ -175,8 +216,22 @@ class VisualSitemap {
     $definition['section'] = implode('.', $id);
     $definition += ['type' => 'page', 'markup' => ''];
 
+    $states = array_merge(
+      array_map(function ($state) {
+        return 'state-is-' . $state;
+      }, $this->g->get($definition, 'state', '', function ($value) use ($all_states) {
+        $value = explode(' ', $value);
+        if (in_array('*', $value)) {
+          return $all_states;
+        }
+
+        return $value;
+      }))
+    );
+
     $vars = [
       'level' => $context['level'],
+      'states' => $states ? ' ' . implode($states, ' ') : '',
       'privileged' => $this->g->get($definition, 'privileged') ? $this->getIcon('lock') : '',
       'type' => str_replace('_', '-', $definition['type']),
       'flag' => $this->g->get($definition, 'type', '', function ($value) {

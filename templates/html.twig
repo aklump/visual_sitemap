@@ -13,6 +13,7 @@
     <h1 class="title">{{ title|raw }}</h1>
     <h2 class="subtitle">{{ subtitle|raw }}</h2>
   </header>
+  {% if states %}{% include('state-toggles.twig') %}{% endif %}
   {{ content|raw }}
   {% include('legend.twig') %}
   {% if footer %}
@@ -22,5 +23,58 @@
     <a target="_blank" href="http://www.intheloftstudios.com/">In the Loft Studios</a>
   </div>
 </article>
+<script
+    src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+    crossorigin="anonymous"></script>
+<script type="application/javascript">
+  $('document').ready(function () {
+
+    window.onpopstate = function (event) {
+      UISync();
+    };
+
+    function UISync() {
+      var state = event.state.state;
+      if (!state) {
+        $sections.removeClass('is-hidden');
+        activeState = null;
+      }
+      else {
+        $visible = $sections.filter('.state-is-' + state);
+        $visible.removeClass('is-hidden').addClass('is-visible');
+        $sections.not($visible).addClass('is-hidden');
+        activeState = state;
+      }
+    };
+    
+    function getStateFromUrl() {
+      return window.location.hash.substr(1) || null;
+    }
+
+    function setState(state) {
+      var url = window.location.href.split('#');
+      console.log(url);
+      history.pushState({"state": state}, null, state);
+    }
+
+    var $sections = $('.section');
+
+    // Read in from URL on load.
+    var state = getStateFromUrl();
+    if (state) {
+      history.replaceState({"state": state}, null, window.location + '#' + state);
+    }
+    else {
+      UISync;
+    }
+
+    $('.state-toggles').addClass('is-ready').find('.js-state-toggle').click(function () {
+      setState($(this).data('state'));
+      $('.state-toggles').removeClass('is-ready');
+    });
+  });
+
+</script>
 </body>
 </html>

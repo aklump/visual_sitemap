@@ -17,6 +17,9 @@
                 "privileged": {
                     "type": "boolean"
                 },
+                "state": {
+                    "type": "string"
+                },
                 "type": {
                     "type": "string",
                     "default": "page",
@@ -32,7 +35,7 @@
                 },
                 "path": {
                     "type": "string",
-                    "pattern": "^\\/"
+                    "pattern": "^\\/|http"
                 },
                 "sections": {
                     "type": "array",

@@ -1,0 +1,11 @@
+<div class="state-toggles">
+  <span class="state-toggles__label">Choose a state: </span>
+  <ul>
+    {% for state in states %}
+      <li>
+        <a class="js-state-toggle" href="javascript:void(0)" data-state="{{
+        state }}">{{ state }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

@@ -63,6 +63,11 @@ if (empty($json)) {
   throw new \RuntimeException("Invalid JSON in configuration file: $definition_file");
 }
 
+$state = $cli->getParam('state');
+if ($state && !in_array($state, ($valid_states = VisualSitemap::getAllStates($json)))) {
+  throw new \RuntimeException("Invalid state \"$state\"; must be one of: " . implode(', ', $valid_states));
+}
+
 // Template discovery.
 $templates = [];
 $user_templates = NULL;
@@ -77,7 +82,8 @@ $vismap = new VisualSitemap(
   $definition,
   $twig,
   FilePath::create(ROOT . '/schema.json'),
-  $user_templates
+  $user_templates,
+  $state
 );
 
 // Do not overwrite without the -f flag.
