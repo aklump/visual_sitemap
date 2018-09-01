@@ -1,6 +1,6 @@
 # Visual Sitemap
 
-![Example Sitemap](images/thumbnail.png)
+![Example Sitemap](images/screenshot.png)
 
 ## Summary
 
