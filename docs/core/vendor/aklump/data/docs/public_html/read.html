@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Reading Data</title>
+    <link href="search/tipuesearch.css" rel="stylesheet">
+    <style type="text/css" media="all">
+      @import url("style.css");
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="search/tipuesearch_content.js"></script>
+    <script src="search/tipuesearch_set.js"></script>
+    <script src="search/tipuesearch.min.js"></script>
+    <script src="js/core.js"></script>
+
+</head>
+
+<body class="page-read">
+<header>
+<div class="pager">
+  <a href="index.html" class="prev index">&laquo;Index</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="defined-vars.html" class="next defined-vars">Getting Variables&raquo;</a>
+</div>
+
+</header>
+
+<div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+<h1>Reading Data</h1>
+<div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+
+<p>Here are some examples of how this class is used to get data out of an object or array.  The examples use an array, but they would work equally well with standard class objects, and other objects with public properties or magic getters, or a <code>get()</code> method.</p>
+
+<p>For all examples, assume the following setup:</p>
+
+<pre><code>&lt;?php
+$data = ['id' =&gt; '123', 'email' =&gt; 'me@there.com'];
+$obj = new Data;
+</code></pre>
+
+<h2>Example One: Simple</h2>
+
+<p>Simple. No transformation. Data is present.</p>
+
+<pre><code>$result = $obj-&gt;get($data, 'id');
+
+// $result === '123';
+</code></pre>
+
+<h2>Example Two: Using Default</h2>
+
+<p>Simple. With Default. Data not present.</p>
+
+<pre><code>$result = $obj-&gt;get($data, 'name', 'anonymous');
+
+// $result === 'anonymous';
+</code></pre>
+
+<h2>Example Three: Transformation Callbacks</h2>
+
+<p>The callback receives three arguments:</p>
+
+<ol>
+<li>The computed value; this will be the default if the path doesn't exist.</li>
+<li>The original default value.</li>
+<li><code>true</code> if the path existed; a.k.a. <code>true</code> if the default is NOT being used.</li>
+</ol>
+
+<p>Transformation to integer.  Notice that the transformation callback can do anything to the value you want.  It just happens to convert to integer in this example.</p>
+
+<pre><code>$result = $obj-&gt;get($data, 'id', null, function ($value, $default, $exists) {
+    return $value ? intval($value) : $default;
+});
+
+// $result === 123
+</code></pre>
+
+<h2>Example Four: Shorthand method(s)</h2>
+
+<p>... instead of callback, try using <code>getInt()</code> method, which is far less verbose ...</p>
+
+<pre><code>$result = $obj-&gt;getInt($data, 'id');
+
+// $result === 123
+</code></pre>
+
+<h2>Example Five: Chaining</h2>
+
+<p>A contrived example as you would just use <code>get()</code> in such a case, but this demonstrates a point: how to get a value through chaining.  The <code>getThen()</code> method returns an instance of the object, not the value.  You have to use the <code>value()</code> method to return the value itself.</p>
+
+<pre><code>$result = $obj-&gt;getThen($data, 'id')
+              -&gt;value();
+
+// $result === '123'
+</code></pre>
+
+<h2>Example Six: Chaining with filter</h2>
+
+<p><code>getThen()</code> is really meant for leveraging the <code>filter()</code> method.</p>
+
+<pre><code>$result = $obj-&gt;getThen($data, 'email')
+              -&gt;filter(FILTER_SANITIZE_EMAIL)
+              -&gt;value();
+
+// $result === 'me@there.com'
+</code></pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>  
+</div>
+
+<footer>
+<div class="pager">
+  <a href="index.html" class="prev index">&laquo;Index</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="defined-vars.html" class="next defined-vars">Getting Variables&raquo;</a>
+</div>
+
+
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.0.28 &bull; Last Updated: Tue, 30 May 2017 18:04:17 -0700</p>
+  </div>
+</footer>
+
+<script>
+$(document).ready(function() {
+  $('#tipue_search_input').tipuesearch();
+});
+</script>
+
+</body>
+</html>
+

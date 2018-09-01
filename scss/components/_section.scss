@@ -6,6 +6,9 @@
   align-items: center;
   border-radius: 30px;
   line-height: 1.4;
+  &.is-hidden {
+    display: none;
+  }
 }
 
 .section--level0 {

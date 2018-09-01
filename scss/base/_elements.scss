@@ -32,6 +32,13 @@ header {
   margin-bottom: $gap__fixed--v--tall;
 }
 
+.description {
+  text-align: center;
+  margin: $gap__fixed--v--tall auto;
+  width: 100%;
+  max-width: 1200px;
+}
+
 footer {
   text-align: center;
   margin: $gap__fixed--v auto $gap__fixed--v--tall;

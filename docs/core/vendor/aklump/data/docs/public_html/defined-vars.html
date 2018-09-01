@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Getting Variables</title>
+    <link href="search/tipuesearch.css" rel="stylesheet">
+    <style type="text/css" media="all">
+      @import url("style.css");
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="search/tipuesearch_content.js"></script>
+    <script src="search/tipuesearch_set.js"></script>
+    <script src="search/tipuesearch.min.js"></script>
+    <script src="js/core.js"></script>
+
+</head>
+
+<body class="page-defined-vars">
+<header>
+<div class="pager">
+  <a href="read.html" class="prev read">&laquo;Reading Data</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="write--ways.html" class="next write--ways">Ways to Write Data&raquo;</a>
+</div>
+
+</header>
+
+<div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+<h1>Getting Variables</h1>
+<div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+
+<p>You can use this class to read from variables quite easily.  For example of you want to get the value of <code>$foo</code> and you don't know if <code>$foo</code> is defined or not, you can do the following and leverage the footprint of <code>Data</code>.</p>
+
+<pre><code>$foo = 'white';
+...
+$result = $this-&gt;data-&gt;get(get_defined_vars(), 'foo', 'black');
+
+// $result === 'white'
+
+
+$result = $this-&gt;data-&gt;get(get_defined_vars(), 'bar', 'black');
+
+// $result === 'black'
+</code></pre>
+
+<p><code>get_defined_vars()</code> only works in the current scope.  Learn about <a href="http://php.net/manual/en/function.get-defined-vars.php">get_defined_vars()</a>.</p>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>  
+</div>
+
+<footer>
+<div class="pager">
+  <a href="read.html" class="prev read">&laquo;Reading Data</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="write--ways.html" class="next write--ways">Ways to Write Data&raquo;</a>
+</div>
+
+
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.0.28 &bull; Last Updated: Tue, 30 May 2017 18:04:17 -0700</p>
+  </div>
+</footer>
+
+<script>
+$(document).ready(function() {
+  $('#tipue_search_input').tipuesearch();
+});
+</script>
+
+</body>
+</html>
+

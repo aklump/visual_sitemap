@@ -2,6 +2,9 @@
     "$schema": "http://json-schema.org/draft-06/schema#",
     "type": "object",
     "definitions": {
+        "state": {
+            "type": "strint"
+        },
         "section": {
             "type": "object",
             "additionalProperties": false,
@@ -18,7 +21,7 @@
                     "type": "boolean"
                 },
                 "state": {
-                    "type": "string"
+                    "#ref": "state"
                 },
                 "type": {
                     "type": "string",
@@ -57,6 +60,9 @@
         "subtitle": {
             "type": "string"
         },
+        "description": {
+            "type": "string"
+        },
         "footer": {
             "type": "string"
         },
@@ -65,6 +71,13 @@
         },
         "timezone": {
             "type": "string"
+        },
+        "state": {
+            "#ref": "state"
+        },
+        "states": {
+            "type": "object",
+            "additionalProperties": true
         },
         "sections": {
             "type": "array",

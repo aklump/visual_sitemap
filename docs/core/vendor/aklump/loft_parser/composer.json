@@ -1,0 +1,19 @@
+{
+  "name": "aklump/loft_parser",
+  "type": "library",
+  "description": "A collection of classes to process/parse text e.g. convert HTML to MediaWiki markup.",
+  "keywords": ["html parser", "mediawiki", "markup converter"],
+  "homepage": "http://github.com/aklump/loft_parser",
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Aaron Klump",
+      "email": "sourcecode@intheloftstudios.com",
+      "homepage": "http://www.intheloftstudios.com",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "classmap" : [ "classes/" ]
+  }
+}

@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Transformations</title>
+    <link href="search/tipuesearch.css" rel="stylesheet">
+    <style type="text/css" media="all">
+      @import url("style.css");
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="search/tipuesearch_content.js"></script>
+    <script src="search/tipuesearch_set.js"></script>
+    <script src="search/tipuesearch.min.js"></script>
+    <script src="js/core.js"></script>
+
+</head>
+
+<body class="page-transform">
+<header>
+<div class="pager">
+  <a href="conditionals.html" class="prev conditionals">&laquo;Conditionals</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="index.html" class="next index">Index&raquo;</a>
+</div>
+
+</header>
+
+<div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+<h1>Transformations</h1>
+<div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+
+<p>If the transformation is occurring as you pull data out of the subject, then it is probably less verbose to simply use the fourth parameter of the <code>get()</code> method, the <em>value callback</em>.  If, however, you want to transform the value inside of <code>$subject</code>, then this page will advise on how to do that.</p>
+
+<h2>Transform with a function name</h2>
+
+<p>The function must only take a single parameter, which is the <code>$value</code>.  To use a function with a different signature, wrap it in an anonymous function.</p>
+
+<p>This example will transform a value via <code>strtoupper()</code>, observe:</p>
+
+<pre><code>$subject = array('name' =&gt; 'bob');
+$obj-&gt;getThen($subject, 'name')-&gt;call('strtoupper')-&gt;set($subject);
+
+// $subject['name'] === 'BOB';
+</code></pre>
+
+<p>This example will assign it to a different key:</p>
+
+<pre><code>$subject = array('name' =&gt; 'bob');
+$obj-&gt;getThen($subject, 'name')-&gt;call('strtoupper')-&gt;set($subject, 'ucname');
+
+// $subject['name'] === 'bob';
+// $subject['ucname'] === 'BOB';
+</code></pre>
+
+<h2>Transform with an anonymous function</h2>
+
+<pre><code>$from = array('being' =&gt; 'dog');
+$obj-&gt;getThen($from, 'being')
+    -&gt;call(function ($value) {
+        $value = str_split($value);
+        $value = array_reverse($value);
+
+        return implode($value);
+    })
+    -&gt;set($from);
+
+// $from['being'] === 'god';
+</code></pre>
+
+<h2>Transform with arguments</h2>
+
+<p>Additional arguments to <code>call()</code> will be sent to the <a href="http://php.net/manual/en/language.types.callable.php">callable as arguments</a>.  This is the same as <code>call_user_func_array()</code> which is used under the hood.</p>
+
+<pre><code>class MyClass
+{
+    public static function Concat()
+    {
+        return implode('.', func_get_args());
+    }
+}
+...
+$result = $obj-&gt;onlyIf($data, 'id')
+              -&gt;call('MyClass::Concat', 'do', 're', 'mi')
+              -&gt;value();
+
+// $result === 'id.do.re.mi';
+</code></pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>  
+</div>
+
+<footer>
+<div class="pager">
+  <a href="conditionals.html" class="prev conditionals">&laquo;Conditionals</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="index.html" class="next index">Index&raquo;</a>
+</div>
+
+
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.0.28 &bull; Last Updated: Tue, 30 May 2017 18:04:18 -0700</p>
+  </div>
+</footer>
+
+<script>
+$(document).ready(function() {
+  $('#tipue_search_input').tipuesearch();
+});
+</script>
+
+</body>
+</html>
+

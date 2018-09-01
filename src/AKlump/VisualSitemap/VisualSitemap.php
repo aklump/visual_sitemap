@@ -126,11 +126,12 @@ class VisualSitemap {
     }
 
     $this->html = $this->twig->render('html.twig', [
-      'title' => $definition['title'],
+      'title' => $this->getDefinitionContentByKey('title'),
       'states' => $states,
-      'footer' => $definition['footer'],
+      'description' => $this->getDefinitionContentByKey('description'),
+      'footer' => $this->getDefinitionContentByKey('footer'),
       'styles' => $styles,
-      'subtitle' => $this->twigRenderString($definition['subtitle']),
+      'subtitle' => $this->twigRenderString($this->getDefinitionContentByKey('subtitle')),
       'types' => $this->getSectionTypes(),
       'icon_types' => $this->getIconTypes(),
       'content' => $this
@@ -165,7 +166,7 @@ class VisualSitemap {
     }
 
     return array_filter(array_unique($states), function ($state) {
-      return $state != '*';
+      return $state != '*' && substr($state, 0, 1) != '!' && $state;
     });
   }
 
@@ -186,24 +187,47 @@ class VisualSitemap {
    */
   protected function preprocess(array &$definition, array $context = []) {
     if (!($all_states = $this->getCached('states'))) {
-      $all_states = $this->getAllStates($definition);
+      $all_states = static::getAllStates($definition);
       $this->setCached('states', $all_states);
     }
 
     $context += [
       'level' => -2,
       'theme' => NULL,
+      'parent_state' => [],
     ];
     $context['level']++;
     $level = $context['level'];
 
+    $definition['state'] = array_filter(
+      $this->g->get($definition, 'state', $context['parent_state'], function ($value, $parent_state, $exists) use ($all_states) {
+        if (!$exists) {
+          return $parent_state;
+        }
+        $value = $original = array_filter(explode(' ', (string) $value));
+
+        if (in_array('*', $value)) {
+          $value = $all_states;
+        }
+
+        $value = array_filter($value, function ($item) use ($original) {
+          return !in_array('!' . $item, $original);
+        });
+
+        return $value ? $value : [];
+      })
+    );
+
     // Each pass at level one, creates a new section master value.
     $context['sections'][$level] = 1;
     if (isset($definition['sections'])) {
+      $parent_state = $context['parent_state'];
       foreach ($definition['sections'] as &$page) {
+        $context['parent_state'] = $definition['state'];
         $this->preprocess($page, $context);
         $context['sections'][$level]++;
       }
+      $context['parent_state'] = $parent_state;
     }
 
     $id = array_splice($context['sections'], 1);
@@ -216,22 +240,11 @@ class VisualSitemap {
     $definition['section'] = implode('.', $id);
     $definition += ['type' => 'page', 'markup' => ''];
 
-    $states = array_merge(
-      array_map(function ($state) {
-        return 'state-is-' . $state;
-      }, $this->g->get($definition, 'state', '', function ($value) use ($all_states) {
-        $value = explode(' ', $value);
-        if (in_array('*', $value)) {
-          return $all_states;
-        }
-
-        return $value;
-      }))
-    );
-
     $vars = [
       'level' => $context['level'],
-      'states' => $states ? ' ' . implode($states, ' ') : '',
+      'states' => array_reduce($definition['state'], function ($carry, $item) {
+        return $carry . ' state-is-' . $item;
+      }),
       'privileged' => $this->g->get($definition, 'privileged') ? $this->getIcon('lock') : '',
       'type' => str_replace('_', '-', $definition['type']),
       'flag' => $this->g->get($definition, 'type', '', function ($value) {
@@ -256,6 +269,17 @@ class VisualSitemap {
     }
 
     return $this;
+  }
+
+  protected function getDefinitionContentByKey($key) {
+    $json = $this->definition->getJson();
+    $fallback = $this->g->get($json, $key);
+
+    return $this->g->get($json, [
+      'states',
+      $this->state,
+      $key,
+    ], $fallback);
   }
 
   /**
@@ -291,8 +315,14 @@ class VisualSitemap {
     }
     else {
       foreach ($map['sections'] as &$section) {
-        $section = $this->renderMap($section);
+        if (!$this->state || in_array($this->state, $section['state'])) {
+          $section = $this->renderMap($section);
+        }
+        else {
+          $section = '';
+        }
       }
+      $map['sections'] = array_filter($map['sections']);
 
       if ($map['level'] < 0) {
         return implode(PHP_EOL, $map['sections']);
@@ -343,7 +373,13 @@ class VisualSitemap {
    *   The filepath to the default output file.
    */
   public function getOutputFilePath() {
-    return empty($this->outputFilePath) ? $this->definition->getDirName() . '/' . $this->definition->getFilename() . '.html' : $this->outputFilePath;
+    $filepath = empty($this->outputFilePath) ? $this->definition->getDirName() . '/' . $this->definition->getFilename() . '.html' : $this->outputFilePath;
+    if ($this->state) {
+      $extension = pathinfo($filepath, PATHINFO_EXTENSION);
+      $filepath = preg_replace("/(\.$extension)$/", '--' . $this->state . "$1", $filepath);
+    }
+
+    return $filepath;
   }
 
   /**

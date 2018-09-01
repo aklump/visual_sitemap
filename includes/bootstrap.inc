@@ -10,19 +10,11 @@ use AKlump\LoftLib\Bash\Color;
 use AKlump\LoftLib\Storage\FilePath;
 use AKlump\VisualSitemap\VisualSitemap;
 
-// Check for vismap installed as composer global package.
-if (file_exists(__DIR__ . '/../../../autoload.php')) {
-  require_once __DIR__ . '/../../../autoload.php';
-}
-else {
-  if (!file_exists(ROOT . '/vendor/autoload.php')) {
-    echo "Missing dependencies; have you run composer install from " . ROOT . PHP_EOL;
-    exit(1);
-  }
-  require_once ROOT . '/vendor/autoload.php';
-}
+require_once ROOT . '/includes/autoload.inc';
 
-$cli = new Bash($argv);
+if (!isset($cli)) {
+  $cli = new Bash($argv);
+}
 
 // Display the version.
 if ($cli->hasFlag('v')) {

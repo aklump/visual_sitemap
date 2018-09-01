@@ -6,21 +6,48 @@
  * Controller for the visual sitemap.
  */
 
+use AKlump\LoftLib\Bash\Bash;
 use AKlump\LoftLib\Bash\Color;
 use AKlump\LoftLib\Bash\Output;
+use AKlump\LoftLib\Storage\FilePath;
+use AKlump\VisualSitemap\VisualSitemap;
 
 define('ROOT', dirname(__FILE__));
 
+require_once ROOT . '/includes/autoload.inc';
+
 try {
-  require ROOT . '/includes/bootstrap.inc';
-  $files_saved = $vismap->generate()->save();
+
+  // Support for --state=* to produce all files.
+  $cli = new Bash($argv);
+  if ($cli->getParam('state') === '*') {
+    $definition = FilePath::create($cli->getArg(1))->load()->getJson(TRUE);
+    $all_states = VisualSitemap::getAllStates($definition);
+    $all_states[] = NULL;
+    $key = array_search('--state=*', $argv);
+    $files_saved = [];
+    foreach ($all_states as $state) {
+      $edited_argv = $argv;
+      $edited_argv[$key] = '--state=' . $state;
+      if (!$state) {
+        unset($edited_argv[$key]);
+      }
+      $cli = new Bash($edited_argv);
+      require ROOT . '/includes/bootstrap.inc';
+      $files_saved = array_merge($files_saved, $vismap->generate()->save());
+    }
+  }
+  else {
+    require ROOT . '/includes/bootstrap.inc';
+    $files_saved = $vismap->generate()->save();
+  }
 }
 catch (\Exception $exception) {
   echo Color::wrap('red', $exception->getMessage() . PHP_EOL);
   exit(1);
 }
 
-echo Color::wrap('green', 'Files created:'). PHP_EOL;
+echo Color::wrap('green', 'Files created:') . PHP_EOL;
 echo Output::list($files_saved);
 
 exit(0);
