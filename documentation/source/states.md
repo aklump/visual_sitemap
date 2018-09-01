@@ -1,3 +1,6 @@
+---
+sort: 50
+---
 # How to Use States For Sitemap Variations
 
 The idea with states is that your website may have a different sitemap based on a given state: admin is logged in, user has a different role, etc.  With states you will define a monolithic site map and then by applying a state at the display level, you can have different layouts or perspectives.

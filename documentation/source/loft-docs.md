@@ -1,3 +1,6 @@
+---
+sort: 100
+---
 # Integration with Loft Docs
 
 This document will describe a method of adding your sitemap to documentation per [Loft Docs](https://github.com/aklump/loft_docs).

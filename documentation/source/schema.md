@@ -1,5 +1,7 @@
 # How to Write the Sitemap Definition
 
+**Review _example.json_ and _quick_start.json_ for examples of actual schemas.**
+
 The schema is very simple, a nested group of objects, each following this pattern:
 
     {

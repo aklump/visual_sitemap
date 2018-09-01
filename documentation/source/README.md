@@ -1,3 +1,6 @@
+---
+title: Overview
+---
 # Visual Sitemap
 
 ![Example Sitemap](images/screenshot.png)
