@@ -37,6 +37,8 @@
 
 <p>Open <em>example.html</em> in a browser to see the example visual sitemap.</p>
 
+<p><strong>Visit <a href="https://aklump.github.io/visual_sitemap">https://aklump.github.io/visual_sitemap</a> for full documentation.</strong></p>
+
 <h2>Quick Start</h2>
 
 <ul>
@@ -45,6 +47,18 @@
 <li>In Terminal type <code>vismap {FILENAME}.json</code> to compile the sitemap.</li>
 <li>Open <em>{FILENAME}.html</em> in a browser.</li>
 </ul>
+
+<h2>Requirements</h2>
+
+<ol>
+<li>You will need <a href="https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx">Composer</a> for installing.</li>
+<li>You will need a text editor to edit JSON files.</li>
+<li>You will need a command line terminal to generate the map.</li>
+</ol>
+
+<h2>Contributing</h2>
+
+<p>If you find this project useful... please consider <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=4E5KZHDQCEUV8&amp;item_name=Gratitude%20for%20aklump%2Fvisual_sitemap">making a donation</a>.</p>
 
 <h2>Installation</h2>
 
@@ -77,14 +91,6 @@ composer require aklump/visual-sitemap
 </code></pre></li>
 </ol>
 
-<h2>Tools</h2>
-
-<ol>
-<li>You will need <a href="https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx">Composer</a> for installing.</li>
-<li>You will need a text editor to edit JSON files.</li>
-<li>You will need a command line terminal to generate the map.</li>
-</ol>
-
 <h2>Usage</h2>
 
 <ol>
@@ -99,139 +105,11 @@ vismap FILENAME.json -c
 <li>Use the <code>--out={filepath}</code> to control the output location <strong>relative to the source file</strong>.  You may also use an absolute path beginning with a <code>/</code>.</li>
 </ol>
 
-<h2>Contributing</h2>
-
-<p>If you find this project useful... please consider <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=4E5KZHDQCEUV8&amp;item_name=Gratitude%20for%20aklump%2Fvisual_sitemap">making a donation</a>.</p>
-
-<h2>Best Practices</h2>
+<h3>Best Practices</h3>
 
 <ol>
 <li>Do not change the order of items in the JSON file, unless you intend to change the section numbers associated with the items.  That is to say, always append new items to the end of a section array.  Failure to follow this point will result in your section numbers being reassigned to different sections.</li>
 </ol>
-
-<h2>Schema</h2>
-
-<p>The schema is very simple, a nested group of objects, each following this pattern:</p>
-
-<pre><code>{
-    "title": "",
-    "more": "",
-    "type": "",
-    "path": "",
-    "sections": []
-}
-</code></pre>
-
-<h3>Top-Level</h3>
-
-<p>The top-level node only, takes the following additional keys:</p>
-
-<ul>
-<li><code>baseUrl</code> Used to generate URL tokens.</li>
-<li><code>footer</code> Optional footer text.</li>
-<li><code>subtitle</code> Optional subtitle.</li>
-<li><code>timezone</code> The timezone name to localize to.</li>
-</ul>
-
-<h3>Nesting</h3>
-
-<p>The <code>sections</code> is where you nest the nodes, like this:</p>
-
-<pre><code>{
-    "sections": [
-        {
-            "title": "",
-            "more": "",
-            "type": "",
-            "path": "",
-            "sections": [
-                {
-                    "title": "",
-                    "more": "",
-                    "type": "",
-                    "path": "",
-                    "sections": []
-                }
-            ]
-        },
-        {
-            "title": "",
-            "more": "",
-            "type": "",
-            "path": "",
-            "sections": []
-        }
-    ]
-}
-</code></pre>
-
-<h3>Types</h3>
-
-<p>The following are the valid section <em>types</em>.  You may omit the <code>type</code> and <code>page</code> is implied, which is the default type.</p>
-
-<ul>
-<li><code>page</code> This represents a page on the site, with a unique path.</li>
-<li><code>content</code> This represents content on a page.</li>
-<li><code>link</code> This represents a link to another page on the site.</li>
-<li><code>external</code> This represents a link to another, external website.</li>
-<li><code>modal</code> This represents a modal or popoup.</li>
-<li><code>download</code> This represents a download file.</li>
-<li><code>form</code> This represents a form.</li>
-</ul>
-
-<h3>Path</h3>
-
-<p>Path should be a relative link and begin with <code>/</code>.  Not all resources should use <code>path</code>.  Use URL placeholders, e.g. <em>user/{user}</em>.</p>
-
-<h3>More (Info)</h3>
-
-<p>Optional, URL hyperlink to anything that provides more info for the section, a Trello card, website, documentation, etc.  This makes the title clickable.  You may use tokens in this field, the following are available:</p>
-
-<table>
-<thead>
-<tr>
-  <th>token</th>
-  <th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>{{ url }}</td>
-  <td>An absolute URL generated using the baseUrl and the <code>path</code> of the section</td>
-</tr>
-<tr>
-  <td>{{ path }}</td>
-  <td>The <code>path</code> of the section</td>
-</tr>
-<tr>
-  <td>{{ base }}</td>
-  <td>The value of the baseUrl configuration variable</td>
-</tr>
-</tbody>
-</table>
-
-<h2>Theming</h2>
-
-<p>You may override the default templates by creating your own overrides directory.  So if wanted to refactor <em>html.twig</em> then first copy it to <em>YOUR_THEME_DIR/html.twig</em> and then modify as desired.</p>
-
-<p>For user styles, add a file called <em>style.css</em> to the same directory and it will be included in the sitemap.</p>
-
-<p>For these themes to be discovered you must pass the <code>--theme=/PATH/TO/DIRECTORY</code> parameter, e.g.</p>
-
-<pre><code>. /vendor/bin/vismap website.json --theme=templates
-</code></pre>
-
-<p>In the above example you will have a directory structure something like the following, and you have installed Visual Sitemap at the project level.  <em>website.json</em> is your config file.  You have created your own theme and styles in <em>templates</em>.</p>
-
-<pre><code>.
-├── templates
-│   ├── html.twig
-│   └── style.css
-├── vendor
-│   └── bin
-│       └── vismap
-└── website.json
-</code></pre>
 </section>
 
 <div class="search__results">
@@ -246,7 +124,7 @@ vismap FILENAME.json -c
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 1.0.6 &bull; Last Updated: Sat, 01 Sep 2018 10:11:47 -0700</p>
+    <p class="legaleeze center">Version: 1.0.7 &bull; Last Updated: Sat, 01 Sep 2018 14:38:11 -0700</p>
   </div>
 </footer>
 
