@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>How to Override the Markup (Custom Theming)</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--theming">
+<header>
+  <div class="pager">
+  <a href="states.html" class="prev states">&laquo;How to Use States For Sitemap Variations</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="_tasklist.html" class="next _tasklist">Tasklist&raquo;</a>
+</div>
+</header>
+
+  <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>How to Override the Markup (Custom Theming)</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+<p>You may override the default templates by creating your own overrides directory.  So if wanted to refactor <em>html.twig</em> then first copy it to <em>YOUR_THEME_DIR/html.twig</em> and then modify as desired.</p>
+
+<p>For user styles, add a file called <em>style.css</em> to the same directory and it will be included in the sitemap.</p>
+
+<p>For these themes to be discovered you must pass the <code>--theme=/PATH/TO/DIRECTORY</code> parameter, e.g.</p>
+
+<pre><code>. /vendor/bin/vismap website.json --theme=templates
+</code></pre>
+
+<p>In the above example you will have a directory structure something like the following, and you have installed Visual Sitemap at the project level.  <em>website.json</em> is your config file.  You have created your own theme and styles in <em>templates</em>.</p>
+
+<pre><code>.
+├── templates
+│   ├── html.twig
+│   └── style.css
+├── vendor
+│   └── bin
+│       └── vismap
+└── website.json
+</code></pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="states.html" class="prev states">&laquo;How to Use States For Sitemap Variations</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="_tasklist.html" class="next _tasklist">Tasklist&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 1.0.7 &bull; Last Updated: Sat, 01 Sep 2018 14:38:13 -0700</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

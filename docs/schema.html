@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>How to Write the Sitemap Definition</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--schema">
+<header>
+  <div class="pager">
+  <a href="loft-docs.html" class="prev loft-docs">&laquo;Integration with Loft Docs</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="states.html" class="next states">How to Use States For Sitemap Variations&raquo;</a>
+</div>
+</header>
+
+  <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>How to Write the Sitemap Definition</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+<p>The schema is very simple, a nested group of objects, each following this pattern:</p>
+
+<pre><code>{
+    "title": "",
+    "more": "",
+    "type": "",
+    "path": "",
+    "sections": []
+}
+</code></pre>
+
+<h2>Top-Level</h2>
+
+<p>The top-level node only, takes the following additional keys:</p>
+
+<ul>
+<li><code>baseUrl</code> Used to generate URL tokens.</li>
+<li><code>footer</code> Optional footer text.</li>
+<li><code>subtitle</code> Optional subtitle.</li>
+<li><code>timezone</code> The timezone name to localize to.</li>
+</ul>
+
+<h2>Nesting</h2>
+
+<p>The <code>sections</code> is where you nest the nodes, like this:</p>
+
+<pre><code>{
+    "sections": [
+        {
+            "title": "",
+            "more": "",
+            "type": "",
+            "path": "",
+            "sections": [
+                {
+                    "title": "",
+                    "more": "",
+                    "type": "",
+                    "path": "",
+                    "sections": []
+                }
+            ]
+        },
+        {
+            "title": "",
+            "more": "",
+            "type": "",
+            "path": "",
+            "sections": []
+        }
+    ]
+}
+</code></pre>
+
+<h2>Types</h2>
+
+<p>The following are the valid section <em>types</em>.  You may omit the <code>type</code> and <code>page</code> is implied, which is the default type.</p>
+
+<ul>
+<li><code>page</code> This represents a page on the site, with a unique path.</li>
+<li><code>content</code> This represents content on a page.</li>
+<li><code>link</code> This represents a link to another page on the site.</li>
+<li><code>external</code> This represents a link to another, external website.</li>
+<li><code>modal</code> This represents a modal or popoup.</li>
+<li><code>download</code> This represents a download file.</li>
+<li><code>form</code> This represents a form.</li>
+</ul>
+
+<h2>Path</h2>
+
+<p>Path should be a relative link and begin with <code>/</code>.  Not all resources should use <code>path</code>.  Use URL placeholders, e.g. <em>user/{user}</em>.</p>
+
+<h2>More (Info)</h2>
+
+<p>Optional, URL hyperlink to anything that provides more info for the section, a Trello card, website, documentation, etc.  This makes the title clickable.  You may use tokens in this field, the following are available:</p>
+
+<table>
+<thead>
+<tr>
+  <th>token</th>
+  <th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>{{ url }}</td>
+  <td>An absolute URL generated using the baseUrl and the <code>path</code> of the section</td>
+</tr>
+<tr>
+  <td>{{ path }}</td>
+  <td>The <code>path</code> of the section</td>
+</tr>
+<tr>
+  <td>{{ base }}</td>
+  <td>The value of the baseUrl configuration variable</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="loft-docs.html" class="prev loft-docs">&laquo;Integration with Loft Docs</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="states.html" class="next states">How to Use States For Sitemap Variations&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 1.0.7 &bull; Last Updated: Sat, 01 Sep 2018 14:38:12 -0700</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+
