@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>States</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--states">
+<header>
+  <div class="pager">
+  <a href="loft-docs.html" class="prev loft-docs">&laquo;Integration with Loft Docs</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="_tasklist.html" class="next _tasklist">Tasklist&raquo;</a>
+</div>
+</header>
+
+  <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>States</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+<p>The idea with states is that your website may have a different sitemap based on a given state: admin is logged in, user has a different role, etc.  With states you will define a monolithic site map and then by applying a state at the display level, you can have different layouts or perspectives.</p>
+
+<ul>
+<li>A given state must not contain a space char; <code>user-logged-in</code> is good, while <code>user logged in</code> is not allowed.</li>
+<li>The value of <code>state</code> may be one or more states separated by a space.</li>
+<li>State may also be wildcard <code>*</code> which means it will appear in all states.</li>
+<li>A wildcard can be followed by a negative state, e.g.,  <code>* !admin</code> which means it will appear in all states, except the negated one, in this case <code>admin</code>.</li>
+<li>If a section does not explicitly declare a <code>state</code> key, it will inherit it's parent's state.  To block inheritance, set the state to an empty string.</li>
+<li>To implement a state when you generate the sitemap, pass the <code>--state=STATE</code></li>
+<li>To generate all files at once, for all states, pass <code>--state=*</code></li>
+</ul>
+
+<h2>State Inheritance Demonstrated</h2>
+
+<p>Given the following sitemap definition...</p>
+
+<pre><code>    {
+        "state": "*",
+        "sections": [
+            {
+                "title": "About Membership",
+                "sections": [
+                    {
+                        "title": "Sign Up",
+                        "state": ""
+                    },
+                    {
+                        "title": "Benefits"
+                    },
+                    {
+                        "title": "Your Account Info",
+                        "state": "member"
+                    },
+                    {
+                        "title": "Your Affiliate Info",
+                        "state": "member affiliate"
+                    }
+                ]
+            },
+            {
+                "title": "All Members",
+                "state": "admin",
+                "sections": [
+                    {
+                        "title": "Delete"
+                    }
+                ]
+            },
+            {
+                "title": "Contact",
+                "state": "* !admin"
+            }
+        ]
+    }
+</code></pre>
+
+<p>The calculated states are as follows:</p>
+
+<table>
+<thead>
+<tr>
+  <th>Section Title</th>
+  <th>Calculated <code>state</code></th>
+  <th>Why?</th>
+  <th>Visible Only When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>About Membership</td>
+  <td><code>admin affiliate member</code></td>
+  <td>inherited from <code>*</code></td>
+  <td>state is admin, affiliate or member</td>
+</tr>
+<tr>
+  <td>Signup</td>
+  <td>-</td>
+  <td>empty prevents inheritence</td>
+  <td>state is not set</td>
+</tr>
+<tr>
+  <td>Benefits</td>
+  <td><code>admin affiliate member</code></td>
+  <td>inherited from <em>About Membership</em></td>
+  <td>state is admin, affiliate or member</td>
+</tr>
+<tr>
+  <td>Your Account Info</td>
+  <td><code>member</code></td>
+  <td>explicit</td>
+  <td>state is member</td>
+</tr>
+<tr>
+  <td>Your Affiliate Info</td>
+  <td><code>member affiliate</code></td>
+  <td>explicit, multi-value</td>
+  <td>state is member or affiliate</td>
+</tr>
+<tr>
+  <td>All Members</td>
+  <td><code>admin</code></td>
+  <td>explicit</td>
+  <td>state is admin</td>
+</tr>
+<tr>
+  <td>Delete</td>
+  <td><code>admin</code></td>
+  <td>inherited from <em>All Members</em></td>
+  <td>state is admin</td>
+</tr>
+<tr>
+  <td>Contact</td>
+  <td><code>affiliate member</code></td>
+  <td><code>*</code> expands to all, <code>!admin</code> removes admin</td>
+  <td>state is affiliate or member</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="loft-docs.html" class="prev loft-docs">&laquo;Integration with Loft Docs</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="_tasklist.html" class="next _tasklist">Tasklist&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 1.0.6 &bull; Last Updated: Sat, 01 Sep 2018 10:03:35 -0700</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Visual Sitemap</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--readme">
+<header>
+  <div class="pager">
+  <a href="index.html" class="prev index">&laquo;Index</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="loft-docs.html" class="next loft-docs">Integration with Loft Docs&raquo;</a>
+</div>
+</header>
+
+  <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>Visual Sitemap</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+<p><img src="images/thumbnail.png" alt="Example Sitemap" /></p>
+
+<h2>Summary</h2>
+
+<p>Using a very simple JSON file schema to define the structure of your website, this project uses that structure to generate a beautiful, visual HTML sitemap.  The final document has all icons and CSS embedded in it and can be shared with other team members easily.  The primary fonts use Google Fonts and require internet access, however the fallback fonts work just fine offline.</p>
+
+<p>Take a look at <em>example.json</em> to see what a definition file looks like.</p>
+
+<p>Open <em>example.html</em> in a browser to see the example visual sitemap.</p>
+
+<h2>Quick Start</h2>
+
+<ul>
+<li>Once you've installed <em>vismap</em>, create a new data file thus <code>vismap {FILENAME}.json -c</code></li>
+<li>Replace the contents of that file with real content.</li>
+<li>In Terminal type <code>vismap {FILENAME}.json</code> to compile the sitemap.</li>
+<li>Open <em>{FILENAME}.html</em> in a browser.</li>
+</ul>
+
+<h2>Installation</h2>
+
+<h3>Install Globally Using Composer</h3>
+
+<p>To be able to use the commands from any directory in your CLI you may want to install this globally.</p>
+
+<pre><code>composer global require aklump/visual-sitemap
+</code></pre>
+
+<p>Make sure you have the composer bin dir in your <code>PATH</code>. The default value is <em>~/.composer/vendor/bin</em>, but you can check the value that you need to use by running <code>composer global config bin-dir --absolute</code>.</p>
+
+<p>To check this you must open <em>~/.bash_profile</em> (or <em>~/.bashrc</em>); you're looking for a line that looks like the following, if you can't find, you'll need to add it.</p>
+
+<pre><code>export PATH=~/.composer/vendor/bin:$PATH
+</code></pre>
+
+<h3>Install Per Project Using Composer</h3>
+
+<pre><code>cd /your/project/folder
+composer require aklump/visual-sitemap
+</code></pre>
+
+<h3>Testing installation</h3>
+
+<ol>
+<li><p>Test your installation by typing <code>vismap</code> in your terminal, you should see:</p>
+
+<pre><code>Argument 1 must point to a configuration json file.
+</code></pre></li>
+</ol>
+
+<h2>Tools</h2>
+
+<ol>
+<li>You will need <a href="https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx">Composer</a> for installing.</li>
+<li>You will need a text editor to edit JSON files.</li>
+<li>You will need a command line terminal to generate the map.</li>
+</ol>
+
+<h2>Usage</h2>
+
+<ol>
+<li><p>Create the configuration JSON file following the schema.  Use <em>example.json</em> and <em>quick_start.json</em> as guides.  If you wish to use the CLI to create the file (which copies and renames <em>quick_start.json</em>) do the following:</p>
+
+<pre><code>cd /the/dir/to/contain/the/config
+vismap FILENAME.json -c
+</code></pre></li>
+<li><p>You can also refer to <em>schema.json</em>, which uses <a href="https://spacetelescope.github.io/understanding-json-schema/index.html">JSON Schema</a> to define the format of the configuration file.</p></li>
+<li>Generate an HTML version once by running the following command: <code>vismap sitemap.json</code>.  <em>sitemap.html</em> will be created.  If <em>sitemap.html</em> already exists, you will need to use the <code>-f</code> flag to overwrite it, e.g. <code>vismap sitemap.json -f</code>.</li>
+<li>A file watch command is availabe.  As you make changes to the JSON file, the sitemap will automatically be re-generated.  Use <code>vismapwatch sitemap.json</code> for this.  Again, use the <code>-f</code> flag if the HTML file already exists.</li>
+<li>Use the <code>--out={filepath}</code> to control the output location <strong>relative to the source file</strong>.  You may also use an absolute path beginning with a <code>/</code>.</li>
+</ol>
+
+<h2>Contributing</h2>
+
+<p>If you find this project useful... please consider <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=4E5KZHDQCEUV8&amp;item_name=Gratitude%20for%20aklump%2Fvisual_sitemap">making a donation</a>.</p>
+
+<h2>Best Practices</h2>
+
+<ol>
+<li>Do not change the order of items in the JSON file, unless you intend to change the section numbers associated with the items.  That is to say, always append new items to the end of a section array.  Failure to follow this point will result in your section numbers being reassigned to different sections.</li>
+</ol>
+
+<h2>Schema</h2>
+
+<p>The schema is very simple, a nested group of objects, each following this pattern:</p>
+
+<pre><code>{
+    "title": "",
+    "more": "",
+    "type": "",
+    "path": "",
+    "sections": []
+}
+</code></pre>
+
+<h3>Top-Level</h3>
+
+<p>The top-level node only, takes the following additional keys:</p>
+
+<ul>
+<li><code>baseUrl</code> Used to generate URL tokens.</li>
+<li><code>footer</code> Optional footer text.</li>
+<li><code>subtitle</code> Optional subtitle.</li>
+<li><code>timezone</code> The timezone name to localize to.</li>
+</ul>
+
+<h3>Nesting</h3>
+
+<p>The <code>sections</code> is where you nest the nodes, like this:</p>
+
+<pre><code>{
+    "sections": [
+        {
+            "title": "",
+            "more": "",
+            "type": "",
+            "path": "",
+            "sections": [
+                {
+                    "title": "",
+                    "more": "",
+                    "type": "",
+                    "path": "",
+                    "sections": []
+                }
+            ]
+        },
+        {
+            "title": "",
+            "more": "",
+            "type": "",
+            "path": "",
+            "sections": []
+        }
+    ]
+}
+</code></pre>
+
+<h3>Types</h3>
+
+<p>The following are the valid section <em>types</em>.  You may omit the <code>type</code> and <code>page</code> is implied, which is the default type.</p>
+
+<ul>
+<li><code>page</code> This represents a page on the site, with a unique path.</li>
+<li><code>content</code> This represents content on a page.</li>
+<li><code>link</code> This represents a link to another page on the site.</li>
+<li><code>external</code> This represents a link to another, external website.</li>
+<li><code>modal</code> This represents a modal or popoup.</li>
+<li><code>download</code> This represents a download file.</li>
+<li><code>form</code> This represents a form.</li>
+</ul>
+
+<h3>Path</h3>
+
+<p>Path should be a relative link and begin with <code>/</code>.  Not all resources should use <code>path</code>.  Use URL placeholders, e.g. <em>user/{user}</em>.</p>
+
+<h3>More (Info)</h3>
+
+<p>Optional, URL hyperlink to anything that provides more info for the section, a Trello card, website, documentation, etc.  This makes the title clickable.  You may use tokens in this field, the following are available:</p>
+
+<table>
+<thead>
+<tr>
+  <th>token</th>
+  <th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>{{ url }}</td>
+  <td>An absolute URL generated using the baseUrl and the <code>path</code> of the section</td>
+</tr>
+<tr>
+  <td>{{ path }}</td>
+  <td>The <code>path</code> of the section</td>
+</tr>
+<tr>
+  <td>{{ base }}</td>
+  <td>The value of the baseUrl configuration variable</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Theming</h2>
+
+<p>You may override the default templates by creating your own overrides directory.  So if wanted to refactor <em>html.twig</em> then first copy it to <em>YOUR_THEME_DIR/html.twig</em> and then modify as desired.</p>
+
+<p>For user styles, add a file called <em>style.css</em> to the same directory and it will be included in the sitemap.</p>
+
+<p>For these themes to be discovered you must pass the <code>--theme=/PATH/TO/DIRECTORY</code> parameter, e.g.</p>
+
+<pre><code>. /vendor/bin/vismap website.json --theme=templates
+</code></pre>
+
+<p>In the above example you will have a directory structure something like the following, and you have installed Visual Sitemap at the project level.  <em>website.json</em> is your config file.  You have created your own theme and styles in <em>templates</em>.</p>
+
+<pre><code>.
+├── templates
+│   ├── html.twig
+│   └── style.css
+├── vendor
+│   └── bin
+│       └── vismap
+└── website.json
+</code></pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="index.html" class="prev index">&laquo;Index</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="loft-docs.html" class="next loft-docs">Integration with Loft Docs&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 1.0.6 &bull; Last Updated: Sat, 01 Sep 2018 10:03:34 -0700</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

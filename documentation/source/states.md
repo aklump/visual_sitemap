@@ -55,7 +55,7 @@ Given the following sitemap definition...
 
 The calculated states are as follows:
 
-| Section title | Calculated state | Why? | Visible Only When
+| Section Title | Calculated `state` | Why? | Visible Only When
 |----------|----------|---|---|
 | About Membership | `admin affiliate member` | inherited from `*` | state is admin, affiliate or member |
 | Signup | - | empty prevents inheritence| state is not set |

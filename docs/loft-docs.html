@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Integration with Loft Docs</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--loft-docs">
+<header>
+  <div class="pager">
+  <a href="README.html" class="prev README">&laquo;Visual Sitemap</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="states.html" class="next states">States&raquo;</a>
+</div>
+</header>
+
+  <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>Integration with Loft Docs</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+<p>This document will describe a method of adding your sitemap to documentation per <a href="https://github.com/aklump/loft_docs">Loft Docs</a>.</p>
+
+<h2>The File Structure</h2>
+
+<pre><code>docs
+├── hooks
+│   └── sitemap.sh
+├── sitemap
+│   ├── html.twig *
+│   └── sitemap.json
+└── source
+    └── sitemap.md
+</code></pre>
+
+<ul>
+<li>Optional, template override</li>
+</ul>
+
+<h2>Instructions</h2>
+
+<ol>
+<li><p>Create a hook file called <em>sitemap.sh</em> with the following, this will handle the generation during documentation compilation.</p>
+
+<pre><code>#!/usr/bin/env bash
+
+docs_vismap=$(type vismap &gt;/dev/null &amp;2&gt;&amp;1 &amp;&amp; which vismap)
+
+if [ "$docs_vismap" ]; then
+    cd "$1" &amp;&amp; $docs_vismap "$4/sitemap/sitemap.json" --out="$9/vismap.html" -f --theme="$4/sitemap" &amp;&amp; exit 0
+    exit 1
+fi
+</code></pre></li>
+<li><p>Register the hook file.  Add the filename to <em>core-config.sh</em> to the <code>pre_hooks</code> var:</p>
+
+<pre><code>pre_hooks = "sitemap.sh"
+</code></pre></li>
+<li><p>Create a folder <em>docs/sitemap</em>.</p></li>
+<li>Create your sitemap json in <em>docs/sitemap/sitemap.json</em>.</li>
+<li>Optional, place template overrides in <em>docs/sitemap</em>.</li>
+<li><p>Create a wrapper file called <em>sitemap.md</em> with something like the following; the <code>iframe</code> is the important part.  You may add other content as necessary around the iframe.</p>
+
+<pre><code># Visual Sitemap
+
+&lt;iframe src="vismap.html" height="1200"&gt;&lt;/iframe&gt;
+</code></pre></li>
+<li><p>Now compile your documentation and ensure all is as expected.  You can use <em>vismap.html</em> as a standalone file, or you can view it wrapped by <em>sitemap.html</em> as part of the documentation.</p></li>
+</ol>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="README.html" class="prev README">&laquo;Visual Sitemap</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="states.html" class="next states">States&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 1.0.6 &bull; Last Updated: Sat, 01 Sep 2018 10:03:35 -0700</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+
