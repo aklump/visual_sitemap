@@ -22,7 +22,7 @@ try {
   $cli = new Bash($argv);
   if ($cli->getParam('state') === '*') {
     $definition = FilePath::create($cli->getArg(1))->load()->getJson(TRUE);
-    $all_states = VisualSitemap::getAllStates($definition);
+    $all_states = VisualSitemap::getDefinedStates($definition);
     $all_states[] = NULL;
     $key = array_search('--state=*', $argv);
     $files_saved = [];

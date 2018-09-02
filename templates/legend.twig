@@ -11,8 +11,8 @@
   </div>
   <div class="legend__icons">
     {% for name, icon in icon_types %}
-      <div class="section__{{ name }}">{{ icon.svg|raw }}
-        <span>{{ icon.title }}</span></div>
+      <div class="section__icon section__{{ name }}">{{ icon.svg|raw }}
+        <span>{{ icon.title|title }}</span></div>
     {% endfor %}
   </div>
 </aside>

@@ -56,7 +56,7 @@ if (empty($json)) {
 }
 
 $state = $cli->getParam('state');
-if ($state && !in_array($state, ($valid_states = VisualSitemap::getAllStates($json)))) {
+if ($state && !in_array($state, ($valid_states = VisualSitemap::getDefinedStates($json)))) {
   throw new \RuntimeException("Invalid state \"$state\"; must be one of: " . implode(', ', $valid_states));
 }
 

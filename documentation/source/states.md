@@ -85,3 +85,21 @@ You may indicate custom text by state by doing something like the following:
                 },
                 
 In this example the title will be _Not Logged In_ when the state is set to `anonymous`, otherwise it will be _Sitemap_.  The description is also overridden.                
+
+## Using Icons to Show State
+
+You may provide SVG icons for each state if you wish to visually indicate state on sections.  Here's how you'd do that.
+
+        {
+            ...
+            "states": {
+                "admin": {
+                    "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 512 512\"><title/><path d=\"M381.844 245.406C383.031 238.438 384 231.344 384 224v-96C384 57.312 326.688 0 256 0S128 57.312 128 128v96c0 7.344.969 14.438 2.156 21.406C52.719 272.906 0 324.375 0 384v96c0 17.688 14.312 32 32 32h448c17.688 0 32-14.312 32-32v-96c0-59.625-52.719-111.094-130.156-138.594zM192 128c0-35.344 28.656-64 64-64s64 28.656 64 64v96c0 35.344-28.656 64-64 64s-64-28.656-64-64v-96zm256 320H64v-64c0-34.562 36.812-64.594 91.594-81.5C179.031 332.438 215.062 352 256 352s76.969-19.562 100.406-49.5C411.188 319.406 448 349.438 448 384v64z\"/></svg>"
+                    "legend": "Admin Role"
+                },
+                ...
+                
+* Notice the `width` and `height` is set to around 20x20; you can play with this as desired.
+* The SVG color will be controlled by core CSS.
+* You may want to use [SVGO](https://www.npmjs.com/package/svgo) to compress your svg code before pasting it into the JSON.
+* Notice the _legend_ key, this allows you to indicate the title next to the icon when it appears in the legend.  If not provided then the state will be used.

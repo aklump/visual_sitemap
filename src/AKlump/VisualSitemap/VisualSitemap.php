@@ -105,7 +105,7 @@ class VisualSitemap {
   public function generate() {
     $this->validateDefinition();
     $build = $definition = $this->definition->getJson(TRUE);
-    $states = $this->getAllStates($definition);
+    $states = $this->getStates();
 
     $user_css = ROOT . '/user_templates/style.css';
     $user_css = file_exists($user_css) ? $user_css : NULL;
@@ -153,7 +153,7 @@ class VisualSitemap {
    * @return array
    *   All unique states.
    */
-  public static function getAllStates(array $definition, array &$states = []) {
+  public static function getDefinedStates(array $definition, array &$states = []) {
 
     if (isset($definition['states'])) {
       $states = array_merge($states, array_keys($definition['states']));
@@ -165,7 +165,7 @@ class VisualSitemap {
 
     if (isset($definition['sections'])) {
       foreach ($definition['sections'] as $section) {
-        static::getAllStates($section, $states);
+        static::getDefinedStates($section, $states);
       }
     }
 
@@ -175,6 +175,21 @@ class VisualSitemap {
       }, $states)), function ($state) {
       return $state != '*' && $state;
     });
+  }
+
+  /**
+   * Get the states from the current definition.
+   *
+   * @return array
+   *   An indexed array of states.
+   */
+  private function getStates() {
+    if (!($states = $this->getCached('states'))) {
+      $states = static::getDefinedStates($this->definition->getJson(TRUE));
+      $this->setCached('states', $states);
+    }
+
+    return $states;
   }
 
   /**
@@ -209,10 +224,7 @@ class VisualSitemap {
    * @throws \Twig_Error_Syntax
    */
   protected function preprocess(array &$definition, array $context = []) {
-    if (!($all_states = $this->getCached('states'))) {
-      $all_states = static::getAllStates($definition);
-      $this->setCached('states', $all_states);
-    }
+    $all_states = $this->getStates();
     if (!($privileged_states = $this->getCached('states'))) {
       $privileged_states = static::getAllPrivilegedStates($definition);
       $this->setCached('states', $privileged_states);
@@ -272,9 +284,6 @@ class VisualSitemap {
       'states' => array_reduce($definition['state'], function ($carry, $item) {
         return $carry . ' state-is-' . $item;
       }),
-      'privileged' => $this->g->get($definition, 'privileged', array_intersect($definition['state'], $privileged_states), function ($is_privileged) {
-        return $is_privileged ? $this->getIcon('lock') : '';
-      }),
       'type' => str_replace('_', '-', $definition['type']),
       'flag' => $this->g->get($definition, 'type', '', function ($value) {
         return empty($value) ? '' : strtoupper(substr($value, 0, 1));
@@ -293,6 +302,18 @@ class VisualSitemap {
       }),
       'markup' => $definition['markup'],
     ];
+
+    // Set up the SVG icons for the section.
+    $vars['icons'] = [];
+    if ($this->g->get($definition, 'privileged', array_intersect($definition['state'], $privileged_states))) {
+      $vars['icons']['privileged'] = $this->getIcon('lock');
+    }
+    foreach ($definition['state'] as $state) {
+      if ($icon = $this->getIconByState($state)) {
+        $vars['icons'][$state] = $icon;
+      }
+    }
+
     if ($vars['level'] >= 0) {
       $definition['markup'] = $this->twig->render('section.twig', $vars);
     }
@@ -318,10 +339,31 @@ class VisualSitemap {
    *   The filename without extension.  This must be located in the images
    *   folder and be a .svg image.
    *
-   * @return bool|string
+   * @return null|string
+   *   The svg markup or null if none.
    */
   private function getIcon($filename) {
-    return file_get_contents(ROOT . '/images/' . $filename . '.svg');
+    if (!($svg = file_get_contents(ROOT . '/images/' . $filename . '.svg'))) {
+      return NULL;
+    }
+
+    return $svg;
+  }
+
+  /**
+   * Return the svg markup of an icon for a given state.
+   *
+   * @param string $state
+   *   The state.
+   *
+   * @return null|string
+   *   The svg markup or null if none.
+   */
+  private function getIconByState($state) {
+    $json = $this->definition->getJson();
+    $svg = $this->g->get($json, ['states', $state, 'icon']);
+
+    return $svg;
   }
 
   /**
@@ -466,12 +508,27 @@ class VisualSitemap {
    *   All valid icon types as defined by the schema.
    */
   private function getIconTypes() {
-    return [
+    $types = [
       'privileged' => [
         'title' => 'Requires login',
         'svg' => $this->getIcon('lock'),
       ],
     ];
+    $json = $this->definition->getJson();
+    foreach ($this->getStates() as $state) {
+      if ($svg = $this->getIconByState($state)) {
+        $types[$state] = [
+          'title' => $this->g->get($json, [
+            'states',
+            $state,
+            'legend',
+          ], $state),
+          'svg' => $svg,
+        ];
+      }
+    }
+
+    return $types;
   }
 
   /**
