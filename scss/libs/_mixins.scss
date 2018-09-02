@@ -1,0 +1,19 @@
+@mixin container() {
+  margin: $gap__fixed--v--tall auto;
+  width: 100%;
+  max-width: $container;
+}
+
+@mixin container_narrow() {
+  margin: $gap__fixed--v--tall auto;
+  width: 100%;
+  max-width: $container--narrow;
+}
+
+@mixin margin_bottom($margin: null){
+  $margin: $gap__fixed--v !default;
+  margin-bottom: $margin;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

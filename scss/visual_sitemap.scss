@@ -9,7 +9,7 @@
 @import 'config/spacing';
 //
 ////Mixins
-//@import 'libs/mixins';
+@import 'libs/mixins';
 
 //
 //
@@ -24,3 +24,4 @@
 //Components
 @import "components/legend";
 @import "components/section";
+@import "components/notes";

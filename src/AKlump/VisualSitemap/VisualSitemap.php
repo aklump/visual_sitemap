@@ -20,7 +20,21 @@ class VisualSitemap {
 
   const MODE_PROD = 2;
 
+  /**
+   * Set to TRUE after preprocess is called.
+   *
+   * @var bool
+   */
+  protected $processed = FALSE;
+
   protected $definition;
+
+  /**
+   * Holds the notes during processing.
+   *
+   * @var array
+   */
+  protected $notes;
 
   protected $schems;
 
@@ -137,6 +151,7 @@ class VisualSitemap {
       'content' => $this
         ->preprocess($build)
         ->renderMap($build),
+      'notes' => $this->getNotes(),
     ]);
 
     return $this;
@@ -224,6 +239,7 @@ class VisualSitemap {
    * @throws \Twig_Error_Syntax
    */
   protected function preprocess(array &$definition, array $context = []) {
+    $this->processed = TRUE;
     $all_states = $this->getStates();
     if (!($privileged_states = $this->getCached('states'))) {
       $privileged_states = static::getAllPrivilegedStates($definition);
@@ -273,6 +289,9 @@ class VisualSitemap {
             if ($icon = $this->getIconByState($state)) {
               $all_icons[] = $state;
             }
+          }
+          if (!empty($definition['notes'])) {
+            $all_icons[] = 'notes';
           }
         }
 
@@ -351,7 +370,30 @@ class VisualSitemap {
       $definition['markup'] = $this->twig->render('section.twig', $vars);
     }
 
+    if ($definition['section'] && !empty($definition['notes'])) {
+      $this->notes[] = [
+        'title' => $definition['section'],
+        'items' => $definition['notes'],
+      ];
+    }
+
     return $this;
+  }
+
+  /**
+   * Return the notes for a definition.
+   *
+   * @return array
+   *   Each array has:
+   *   - title
+   *   - items
+   */
+  public function getNotes() {
+    if (!$this->processed) {
+      throw new \RuntimeException("You must first call ::preprocess");
+    }
+
+    return $this->notes;
   }
 
   protected function getDefinitionContentByKey($key) {
@@ -545,6 +587,10 @@ class VisualSitemap {
       'privileged' => [
         'title' => 'Requires login',
         'svg' => $this->getIcon('privileged'),
+      ],
+      'notes' => [
+        'title' => 'See Additional Notes',
+        'svg' => $this->getIcon('notes'),
       ],
     ];
     $json = $this->definition->getJson();

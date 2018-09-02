@@ -15,6 +15,7 @@
     <aside class="description">{{ description|raw }}</aside>
   </header>
   {{ content|raw }}
+  {% include('notes.twig') %}
   {% include('legend.twig') %}
   {% if footer %}
     <footer>{{ footer|raw }}</footer>{% endif %}

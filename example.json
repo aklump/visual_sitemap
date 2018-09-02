@@ -1,6 +1,7 @@
 {
     "title": "Grassy Hills Archery Club",
     "subtitle": "Visual Sitemap &bull; {{ \"now\"|date('F j, Y') }}",
+    "description": "Praesent at vulputate tellus, vehicula dignissim elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. In molestie est sapien, sit amet porttitor ipsum laoreet sit amet. Praesent lacus neque, suscipit quis urna non, varius consequat justo. Curabitur tincidunt leo ac venenatis pharetra. Curabitur ultricies odio ut nibh viverra lobortis. Sed scelerisque pellentesque vehicula.",
     "footer": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac blandit risus. Mauris tempor a lacus a placerat. Vivamus viverra dapibus metus non finibus. Nulla ultricies est nulla, eget efficitur nibh viverra non. Sed sed est viverra nunc malesuada venenatis vitae at tellus. Suspendisse potenti. Morbi non blandit elit, sit amet consectetur mi.",
     "timezone": "America/Los_Angeles",
     "baseUrl": "http://www.gharchery.net",
@@ -37,6 +38,9 @@
                         },
                         {
                             "title": "Learn more Video",
+                            "notes": [
+                                "This is being produced by PBS."
+                            ],
                             "type": "modal"
                         },
                         {

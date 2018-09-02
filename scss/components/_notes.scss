@@ -1,0 +1,14 @@
+.notes {
+  @include container_narrow;
+}
+
+.notes__section-title {
+  text-align: center;
+}
+
+.notes__content {
+  @include margin_bottom();
+  p {
+    @include margin_bottom();
+  }
+}

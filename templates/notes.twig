@@ -1,0 +1,13 @@
+{% if notes %}
+  <div class="notes">
+    <h2 class="notes__section-title">Additional Notes:</h2>
+    {% for note in notes %}
+      <h3 class="notes__title">{{ note.title }}</h3>
+      <div class="notes__content">
+        {% for item in note.items %}
+          <p>{{ item }}</p>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}

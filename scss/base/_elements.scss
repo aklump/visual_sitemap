@@ -33,18 +33,15 @@ header {
 }
 
 .description {
+  @include container;
   text-align: center;
-  margin: $gap__fixed--v--tall auto;
-  width: 100%;
-  max-width: 1200px;
 }
 
 footer {
+  @include container;
   text-align: center;
   margin: $gap__fixed--v auto $gap__fixed--v--tall;
   color: $color--grey;
-  width: 100%;
-  max-width: 1200px;
 }
 
 .credit {
