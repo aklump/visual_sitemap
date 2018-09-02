@@ -155,6 +155,10 @@ class VisualSitemap {
    */
   public static function getAllStates(array $definition, array &$states = []) {
 
+    if (isset($definition['states'])) {
+      $states = array_merge($states, array_keys($definition['states']));
+    }
+
     if (isset($definition['state'])) {
       $states = array_merge($states, explode(' ', $definition['state']));
     }
@@ -165,8 +169,11 @@ class VisualSitemap {
       }
     }
 
-    return array_filter(array_unique($states), function ($state) {
-      return $state != '*' && substr($state, 0, 1) != '!' && $state;
+    return array_filter(
+      array_unique(array_map(function ($state) {
+        return ltrim($state, '!');
+      }, $states)), function ($state) {
+      return $state != '*' && $state;
     });
   }
 

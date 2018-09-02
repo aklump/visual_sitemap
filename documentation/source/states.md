@@ -13,6 +13,7 @@ The idea with states is that your website may have a different sitemap based on 
 * To implement a state when you generate the sitemap, pass the `--state=STATE`
 * To generate all files at once, for all states, pass `--state=*`
 
+
 ## State Inheritance Demonstrated
 
 Given the following sitemap definition...
@@ -68,3 +69,19 @@ The calculated states are as follows:
 | All Members | `admin` | explicit | state is admin |
 | Delete | `admin` | inherited from _All Members_ | state is admin |
 | Contact | `affiliate member` | `*` expands to all, `!admin` removes admin | state is affiliate or member |
+
+## Custom Titles, etc for States
+
+You may indicate custom text by state by doing something like the following:
+
+        {
+            "title": "Sitemap",
+            "subtitle": "Visual Sitemap &bull; {{ \"now\"|date('F j, Y') }}",
+            "description": "",
+            "states": {
+                "anonymous": {
+                    "title": "Not Logged In",
+                    "description": "The site as it's experienced while not logged in."
+                },
+                
+In this example the title will be _Not Logged In_ when the state is set to `anonymous`, otherwise it will be _Sitemap_.  The description is also overridden.                
