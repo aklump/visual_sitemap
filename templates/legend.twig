@@ -2,19 +2,17 @@
   <h3 class="legend__caption">Legend</h3>
   <div class="legend__types">
     {% for type in types %}
-      {% if type != 'page' %}
-        <div class="legend__item type--{{ type|replace({' ': '-'}) }}">
+      <div class="legend__item type--{{ type|replace({' ': '-'}) }}">
       <span
           class="section__flag"><span>{{ type|slice(0,1)|upper }}</span></span>
-          <span>{{ type|title }}</span>
-        </div>
-      {% endif %}
+        <span>{{ type|title }}</span>
+      </div>
     {% endfor %}
   </div>
   <div class="legend__icons">
     {% for name, icon in icon_types %}
-        <div class="section__{{ name }}">{{ icon.svg|raw }}<span>{{ icon.title
-            }}</span></div>
+      <div class="section__{{ name }}">{{ icon.svg|raw }}
+        <span>{{ icon.title }}</span></div>
     {% endfor %}
   </div>
 </aside>
