@@ -1,0 +1,6 @@
+<header{% if branding_color %} style="color: {{ branding_color }}; border-color:
+    {{ branding_color }}"{% endif %}>
+  <h1 class="title">{{ title|raw }}</h1>
+  <h2 class="subtitle">{{ subtitle|raw }}</h2>
+  <aside class="description">{{ description|raw }}</aside>
+</header>

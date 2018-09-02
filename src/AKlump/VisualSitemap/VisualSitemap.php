@@ -141,6 +141,7 @@ class VisualSitemap {
 
     $this->html = $this->twig->render('html.twig', [
       'title' => $this->getDefinitionContentByKey('title'),
+      'branding_color' => $this->getDefinitionContentByKey('branding_color'),
       'states' => $states,
       'description' => $this->getDefinitionContentByKey('description'),
       'footer' => $this->getDefinitionContentByKey('footer'),

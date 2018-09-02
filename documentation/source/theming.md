@@ -18,3 +18,12 @@ In the above example you will have a directory structure something like the foll
     │   └── bin
     │       └── vismap
     └── website.json
+
+## Quick Alternative: Branding Color
+
+To differentiate between site maps, instead of custom theming, just include a `branding_color` in the JSON definition.  This alters the color of the top bar and is faster than setting up a new theme.
+
+    {
+        "title": "Grassy Hills Archery Club",
+        "branding_color": "#65FC72",
+        ...

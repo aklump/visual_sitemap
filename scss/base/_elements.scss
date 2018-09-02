@@ -19,16 +19,19 @@ h1, h2, h3, h4 {
   font-size: 2rem;
   text-align: center;
   display: block;
+  color: inherit;
 }
 
 .subtitle {
   font-size: 1.4rem;
   text-align: center;
   display: block;
+  color: inherit;
 }
 
 header {
-  margin-top: $gap__fixed--v;
+  border-top: 10px solid $color--headings;
+  padding-top: $gap__fixed--v;
   margin-bottom: $gap__fixed--v--tall;
 }
 

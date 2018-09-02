@@ -63,6 +63,10 @@
             "type": "string",
             "minLength": 1
         },
+        "branding_color": {
+            "type": "string",
+            "pattern": "^#[\\d]{6}$"
+        },
         "subtitle": {
             "type": "string"
         },

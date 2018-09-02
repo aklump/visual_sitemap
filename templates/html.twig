@@ -9,20 +9,9 @@
 </head>
 <body>
 <article>
-  <header>
-    <h1 class="title">{{ title|raw }}</h1>
-    <h2 class="subtitle">{{ subtitle|raw }}</h2>
-    <aside class="description">{{ description|raw }}</aside>
-  </header>
-  {{ content|raw }}
-  {% include('notes.twig') %}
-  {% include('legend.twig') %}
-  {% if footer %}
-    <footer>{{ footer|raw }}</footer>{% endif %}
-  <div class="credit">Generated using
-    <a target="_blank" href="http://www.intheloftstudios.com/packages/development/visual_sitemap">Visual Sitemap</a> by
-    <a target="_blank" href="http://www.intheloftstudios.com/">In the Loft Studios</a>
-  </div>
+  {% include('header.twig') %}
+  {% include('main.twig') %}
+  {% include('footer.twig') %}
 </article>
 </body>
 </html>
