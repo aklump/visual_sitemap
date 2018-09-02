@@ -3,7 +3,7 @@
     "type": "object",
     "definitions": {
         "state": {
-            "type": "strint"
+            "type": "string"
         },
         "section": {
             "type": "object",
@@ -22,6 +22,9 @@
                 },
                 "state": {
                     "#ref": "state"
+                },
+                "icon": {
+                    "type": "string"
                 },
                 "type": {
                     "type": "string",

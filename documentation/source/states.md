@@ -103,3 +103,15 @@ You may provide SVG icons for each state if you wish to visually indicate state 
 * The SVG color will be controlled by core CSS.
 * You may want to use [SVGO](https://www.npmjs.com/package/svgo) to compress your svg code before pasting it into the JSON.
 * Notice the _legend_ key, this allows you to indicate the title next to the icon when it appears in the legend.  If not provided then the state will be used.
+
+### Hiding Icons Per Section
+
+You can remove an icon that is appearing on a section by setting it's `icon` property.  For example you may want to hide the admin icon (put there by state) on a parent section, because that parent section is accessible by non-admins, and it's state is admin, only because it has an admin-only child.  By hiding the icon you send a clearer message.  To do so add something like this:
+
+        ...
+        {
+            "title": "Application",
+            "icon": "* !admin",
+            ...
+
+The example above means, show all icons that would normally been shown for this section except the admin icon.

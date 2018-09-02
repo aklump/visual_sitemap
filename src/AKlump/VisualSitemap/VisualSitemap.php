@@ -257,6 +257,43 @@ class VisualSitemap {
       })
     );
 
+    // Determine the icons to use.
+    $definition['icon'] = array_filter(
+      $this->g->get($definition, 'icon', NULL, function ($value, $default, $exists) use ($definition, $privileged_states, $level) {
+
+        // Determine all icons that should appear on this section by default.
+        $all_icons = [];
+
+        // Icons should not appear until level 1.
+        if ($level > 0) {
+          if ($this->g->get($definition, 'privileged', array_intersect($definition['state'], $privileged_states))) {
+            $all_icons[] = 'privileged';
+          }
+          foreach ($definition['state'] as $state) {
+            if ($icon = $this->getIconByState($state)) {
+              $all_icons[] = $state;
+            }
+          }
+        }
+
+        if (!$exists) {
+          return $all_icons;
+        }
+
+        $value = $original = array_filter(explode(' ', (string) $value));
+        if (in_array('*', $value)) {
+          $value = $all_icons;
+        }
+        $value = array_filter($value, function ($item) use ($original) {
+          return !in_array('!' . $item, $original);
+        });
+
+        return $value;
+
+      })
+    );
+
+
     // Each pass at level one, creates a new section master value.
     $context['sections'][$level] = 1;
     if (isset($definition['sections'])) {
@@ -284,6 +321,13 @@ class VisualSitemap {
       'states' => array_reduce($definition['state'], function ($carry, $item) {
         return $carry . ' state-is-' . $item;
       }),
+      'icons' => array_map(function ($icon_key) use ($all_states) {
+        if (in_array($icon_key, $all_states)) {
+          return $this->getIconByState($icon_key);
+        }
+
+        return $this->getIcon($icon_key);
+      }, $definition['icon']),
       'type' => str_replace('_', '-', $definition['type']),
       'flag' => $this->g->get($definition, 'type', '', function ($value) {
         return empty($value) ? '' : strtoupper(substr($value, 0, 1));
@@ -302,17 +346,6 @@ class VisualSitemap {
       }),
       'markup' => $definition['markup'],
     ];
-
-    // Set up the SVG icons for the section.
-    $vars['icons'] = [];
-    if ($this->g->get($definition, 'privileged', array_intersect($definition['state'], $privileged_states))) {
-      $vars['icons']['privileged'] = $this->getIcon('lock');
-    }
-    foreach ($definition['state'] as $state) {
-      if ($icon = $this->getIconByState($state)) {
-        $vars['icons'][$state] = $icon;
-      }
-    }
 
     if ($vars['level'] >= 0) {
       $definition['markup'] = $this->twig->render('section.twig', $vars);
@@ -511,7 +544,7 @@ class VisualSitemap {
     $types = [
       'privileged' => [
         'title' => 'Requires login',
-        'svg' => $this->getIcon('lock'),
+        'svg' => $this->getIcon('privileged'),
       ],
     ];
     $json = $this->definition->getJson();
