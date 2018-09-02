@@ -194,7 +194,7 @@ class VisualSitemap {
     $context += [
       'level' => -2,
       'theme' => NULL,
-      'parent_state' => [],
+      'parent_state' => $all_states,
     ];
     $context['level']++;
     $level = $context['level'];

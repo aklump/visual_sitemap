@@ -72,9 +72,6 @@
         "timezone": {
             "type": "string"
         },
-        "state": {
-            "#ref": "state"
-        },
         "states": {
             "type": "object",
             "additionalProperties": true
