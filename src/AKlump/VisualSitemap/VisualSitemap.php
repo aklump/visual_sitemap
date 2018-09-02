@@ -171,6 +171,22 @@ class VisualSitemap {
   }
 
   /**
+   * Return all states that are considered priveleged.
+   *
+   * @return array
+   *   An indexed array of states.
+   */
+  public static function getAllPrivilegedStates(array $definition) {
+    if (!isset($definition['states'])) {
+      return [];
+    }
+
+    return array_keys(array_filter($definition['states'], function ($state) {
+      return !empty($state['priveleged']);
+    }));
+  }
+
+  /**
    * Add auto-generated values to the sitemap definition.
    *
    * @param array $definition
@@ -189,6 +205,10 @@ class VisualSitemap {
     if (!($all_states = $this->getCached('states'))) {
       $all_states = static::getAllStates($definition);
       $this->setCached('states', $all_states);
+    }
+    if (!($privileged_states = $this->getCached('states'))) {
+      $privileged_states = static::getAllPrivilegedStates($definition);
+      $this->setCached('states', $privileged_states);
     }
 
     $context += [
@@ -245,7 +265,9 @@ class VisualSitemap {
       'states' => array_reduce($definition['state'], function ($carry, $item) {
         return $carry . ' state-is-' . $item;
       }),
-      'privileged' => $this->g->get($definition, 'privileged') ? $this->getIcon('lock') : '',
+      'privileged' => $this->g->get($definition, 'privileged', array_intersect($definition['state'], $privileged_states), function ($is_privileged) {
+        return $is_privileged ? $this->getIcon('lock') : '';
+      }),
       'type' => str_replace('_', '-', $definition['type']),
       'flag' => $this->g->get($definition, 'type', '', function ($value) {
         return empty($value) ? '' : strtoupper(substr($value, 0, 1));
