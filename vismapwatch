@@ -47,6 +47,7 @@ try {
       $cli->hasParam('dev') ? '--dev=' . $cli->getParam('dev') : '',
       $cli->hasParam('out') ? '--out=' . $cli->getParam('out') : '',
       $cli->hasParam('theme') ? '--theme=' . $cli->getParam('theme') : '',
+      $cli->hasParam('state') ? '--state=' . $cli->getParam('state') : '',
     ]);
   }
   catch (\Exception $exception) {
