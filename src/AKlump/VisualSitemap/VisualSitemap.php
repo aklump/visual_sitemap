@@ -139,6 +139,15 @@ class VisualSitemap {
       $styles .= '</style>';
     }
 
+    $legend_icons = $this->getIconTypes();
+    uasort($legend_icons, function ($a, $b) {
+      if ($a['title'] === $b['title']) {
+        return 0;
+      }
+
+      return $a['title'] < $b['title'] ? -1 : 1;
+    });
+
     $this->html = $this->twig->render('html.twig', [
       'title' => $this->getDefinitionContentByKey('title'),
       'branding_color' => $this->getDefinitionContentByKey('branding_color'),
@@ -148,7 +157,7 @@ class VisualSitemap {
       'styles' => $styles,
       'subtitle' => $this->twigRenderString($this->getDefinitionContentByKey('subtitle')),
       'types' => $this->getSectionTypes(),
-      'icon_types' => $this->getIconTypes(),
+      'icon_types' => $legend_icons,
       'content' => $this
         ->preprocess($build)
         ->renderMap($build),
