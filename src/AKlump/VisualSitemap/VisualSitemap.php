@@ -162,6 +162,7 @@ class VisualSitemap {
           'path',
           'more',
           'type',
+          'tested',
           'title',
           'section',
           'icon',
@@ -170,6 +171,7 @@ class VisualSitemap {
           'path',
           'more',
           'type',
+          'tested',
           'title',
           'section',
           'icon',
@@ -381,6 +383,9 @@ class VisualSitemap {
           }
           if (!empty($definition['notes'])) {
             $all_icons[] = 'notes';
+          }
+          if (!empty($definition['tested'])) {
+            $all_icons[] = 'tested';
           }
         }
 
@@ -707,6 +712,10 @@ class VisualSitemap {
       'notes' => [
         'title' => 'See Additional Notes',
         'svg' => $this->getIcon('notes'),
+      ],
+      'tested' => [
+        'title' => 'Has Test Coverage',
+        'svg' => $this->getIcon('tested'),
       ],
     ];
     $json = $this->definition->getJson();

@@ -20,6 +20,9 @@
                     "type": "string",
                     "minLength": 1
                 },
+                "tested": {
+                    "type": "boolean"
+                },
                 "privileged": {
                     "type": "boolean"
                 },

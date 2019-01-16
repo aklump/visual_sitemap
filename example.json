@@ -12,6 +12,7 @@
                 {
                     "title": "Frontpage",
                     "more": "{{ url }}",
+                    "tested": true,
                     "path": "/",
                     "sections": [
                         {
