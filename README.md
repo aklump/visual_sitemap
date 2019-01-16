@@ -66,6 +66,16 @@ To check this you must open _~/.bash_profile_ (or _~/.bashrc_); you're looking f
 1. A file watch command is availabe.  As you make changes to the JSON file, the sitemap will automatically be re-generated.  Use `vismapwatch sitemap.json` for this.  Again, use the `-f` flag if the HTML file already exists.
 1. Use the `--out={filepath}` to control the output location **relative to the source file**.  You may also use an absolute path beginning with a `/`.
 
+### As JSON
+
+You can export your sitemap as JSON using `--format=json`.  Note: the extension used will be `.compiled.json`
+
+    vismap example.json -f --format=json
+
+### As Text List
+
+You can export a list of sections and titles using  `--format=list`
+
 ### Best Practices
 
 1. Do not change the order of items in the JSON file, unless you intend to change the section numbers associated with the items.  That is to say, always append new items to the end of a section array.  Failure to follow this point will result in your section numbers being reassigned to different sections.

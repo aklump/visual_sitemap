@@ -145,6 +145,57 @@
 </tr>
 </tbody>
 </table>
+
+<h2>Custom Titles, etc for States</h2>
+
+<p>You may indicate custom text by state by doing something like the following:</p>
+
+<pre><code>    {
+        "title": "Sitemap",
+        "subtitle": "Visual Sitemap &amp;bull; {{ \"now\"|date('F j, Y') }}",
+        "description": "",
+        "states": {
+            "anonymous": {
+                "title": "Not Logged In",
+                "description": "The site as it's experienced while not logged in."
+            },
+</code></pre>
+
+<p>In this example the title will be <em>Not Logged In</em> when the state is set to <code>anonymous</code>, otherwise it will be <em>Sitemap</em>.  The description is also overridden.</p>
+
+<h2>Using Icons to Show State</h2>
+
+<p>You may provide SVG icons for each state if you wish to visually indicate state on sections.  Here's how you'd do that.</p>
+
+<pre><code>    {
+        ...
+        "states": {
+            "admin": {
+                "icon": "&lt;svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 512 512\"&gt;&lt;title/&gt;&lt;path d=\"M381.844 245.406C383.031 238.438 384 231.344 384 224v-96C384 57.312 326.688 0 256 0S128 57.312 128 128v96c0 7.344.969 14.438 2.156 21.406C52.719 272.906 0 324.375 0 384v96c0 17.688 14.312 32 32 32h448c17.688 0 32-14.312 32-32v-96c0-59.625-52.719-111.094-130.156-138.594zM192 128c0-35.344 28.656-64 64-64s64 28.656 64 64v96c0 35.344-28.656 64-64 64s-64-28.656-64-64v-96zm256 320H64v-64c0-34.562 36.812-64.594 91.594-81.5C179.031 332.438 215.062 352 256 352s76.969-19.562 100.406-49.5C411.188 319.406 448 349.438 448 384v64z\"/&gt;&lt;/svg&gt;"
+                "legend": "Admin Role"
+            },
+            ...
+</code></pre>
+
+<ul>
+<li>Notice the <code>width</code> and <code>height</code> is set to around 20x20; you can play with this as desired.</li>
+<li>The SVG color will be controlled by core CSS.</li>
+<li>You may want to use <a href="https://www.npmjs.com/package/svgo">SVGO</a> to compress your svg code before pasting it into the JSON.</li>
+<li>Notice the <em>legend</em> key, this allows you to indicate the title next to the icon when it appears in the legend.  If not provided then the state will be used.</li>
+</ul>
+
+<h3>Hiding Icons Per Section</h3>
+
+<p>You can remove an icon that is appearing on a section by setting it's <code>icon</code> property.  For example you may want to hide the admin icon (put there by state) on a parent section, because that parent section is accessible by non-admins, and it's state is admin, only because it has an admin-only child.  By hiding the icon you send a clearer message.  To do so add something like this:</p>
+
+<pre><code>    ...
+    {
+        "title": "Application",
+        "icon": "* !admin",
+        ...
+</code></pre>
+
+<p>The example above means, show all icons that would normally been shown for this section except the admin icon.</p>
 </section>
 
 <div class="search__results">
@@ -159,7 +210,7 @@
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 1.0.9 &bull; Last Updated: Sat, 01 Sep 2018 15:00:27 -0700</p>
+    <p class="legaleeze center">Version: 1.0.10 &bull; Last Updated: Wed, 16 Jan 2019 12:30:31 -0800</p>
   </div>
 </footer>
 

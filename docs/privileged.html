@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Privileged</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--privileged">
+<header>
+  <div class="pager">
+  <a href="notes.html" class="prev notes">&laquo;Additional Notes</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="schema.html" class="next schema">How to Write the Sitemap Definition&raquo;</a>
+</div>
+</header>
+
+  <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>Privileged</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+<p>Areas that require login can be thought of as <em>privileged</em>.  If you wish to distinguish such areas, you may use the <code>privileged</code> feature.  This adds visual indication to the sitemap.</p>
+
+<h2>Explicitly By Section</h2>
+
+<ul>
+<li><p>For a given section indicate it is privileged like this:</p>
+
+<pre><code>...
+{
+    "title": "My Account",
+    "privileged": true,
+    ...
+</code></pre></li>
+</ul>
+
+<h2>Generally By State</h2>
+
+<p>You can also indicate that a given state is privileged and then all sections with that state will be considered privileged as well, be default.  You may override this default for individual sections, using the method described above.</p>
+
+<ul>
+<li><p>First indicate that a state is privileged in the root of your definition JSON as <code>states.STATE.privileged</code>.</p>
+
+<pre><code>{
+    "title": "Sitemap",
+    ...
+    "states": {
+        "logged_in": {
+            "privileged": true,
+            "title": "Logged In",
+        },
+        ...
+</code></pre></li>
+<li><p>Then give that state to one or more sections:</p>
+
+<pre><code>...
+{
+    "title": "My Account",
+    "state": "logged_in",
+    ...
+</code></pre></li>
+</ul>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="notes.html" class="prev notes">&laquo;Additional Notes</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="schema.html" class="next schema">How to Write the Sitemap Definition&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 1.0.10 &bull; Last Updated: Wed, 16 Jan 2019 12:30:29 -0800</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

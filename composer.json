@@ -31,7 +31,7 @@
             "AKlump\\VisualSitemap\\": "src\/AKlump\/VisualSitemap\/"
         }
     },
-    "version": "1.0.9",
+    "version": "1.0.10",
     "bin": [
         ".\/vismap",
         ".\/vismapwatch"
