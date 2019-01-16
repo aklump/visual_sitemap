@@ -30,6 +30,20 @@ class VisualSitemap {
   protected $definition;
 
   /**
+   * The compiled file contents to write to disk.
+   *
+   * @var string
+   */
+  protected $compiled;
+
+  /**
+   * Holds the mime type of $compiled.
+   *
+   * @var string
+   */
+  protected $compiledMime;
+
+  /**
    * Holds the notes during processing.
    *
    * @var array
@@ -106,6 +120,70 @@ class VisualSitemap {
   }
 
   /**
+   * Generate file contents as a text list.
+   *
+   * @return $this
+   */
+  public function generateTextList() {
+    $this->generateJson();
+    $this->compiledMime = 'text/plain';
+    $this->compiled = array_map(function ($item) {
+      return $item['section'] . ' ' . $item['title'] . PHP_EOL;
+    }, json_decode($this->compiled, TRUE)['sections']);
+
+    return $this;
+  }
+
+  /**
+   * Generate file contents as JSON.
+   *
+   * @return $this
+   * @throws \Twig_Error_Loader
+   * @throws \Twig_Error_Runtime
+   * @throws \Twig_Error_Syntax
+   */
+  public function generateJson() {
+    $this->validateDefinition();
+    $build = $definition = $this->definition->getJson(TRUE);
+    $this->preprocess($build);
+
+    $sections = [];
+    $this->renderMap($build, $sections);
+    $sections = array_filter($sections, function ($a) {
+      return !empty($a['section']);
+    });
+    uasort($sections, function ($a, $b) {
+      return version_compare($a['section'], $b['section']);
+    });
+
+    $json = array_intersect_key($build, array_flip(['title', 'subtitle', 'description', 'baseUrl']));
+    foreach ($sections as $section) {
+      $json['sections'][] = array_intersect_key($section, array_flip([
+          'path',
+          'more',
+          'type',
+          'title',
+          'section',
+          'icon',
+          'state',
+        ])) + array_fill_keys([
+          'path',
+          'more',
+          'type',
+          'title',
+          'section',
+          'icon',
+          'state',
+        ], NULL);
+    }
+
+    $this->compiled = json_encode($json);
+    $this->compiledMime = 'application/json';
+
+    return $this;
+  }
+
+  /**
    * Generate the visual sitemap in memory.
    *
    * @return \AKlump\VisualSitemap\VisualSitemap
@@ -148,7 +226,7 @@ class VisualSitemap {
       return $a['title'] < $b['title'] ? -1 : 1;
     });
 
-    $this->html = $this->twig->render('html.twig', [
+    $this->compiled = $this->twig->render('html.twig', [
       'title' => $this->getDefinitionContentByKey('title'),
       'branding_color' => $this->getDefinitionContentByKey('branding_color'),
       'states' => $states,
@@ -163,6 +241,7 @@ class VisualSitemap {
         ->renderMap($build),
       'notes' => $this->getNotes(),
     ]);
+    $this->compiledMime = 'text/html';
 
     return $this;
   }
@@ -464,15 +543,17 @@ class VisualSitemap {
    * @throws \Twig_Error_Runtime
    * @throws \Twig_Error_Syntax
    */
-  protected function renderMap(array &$map) {
+  protected function renderMap(array &$map, &$stack = []) {
     $map += ['markup' => ''];
     if (!isset($map['sections'])) {
+      $stack[] = $map;
+
       return $map['markup'];
     }
     else {
       foreach ($map['sections'] as &$section) {
         if (!$this->state || in_array($this->state, $section['state'])) {
-          $section = $this->renderMap($section);
+          $section = $this->renderMap($section, $stack);
         }
         else {
           $section = '';
@@ -481,6 +562,8 @@ class VisualSitemap {
       $map['sections'] = array_filter($map['sections']);
 
       if ($map['level'] < 0) {
+        $stack[] = $map;
+
         return implode(PHP_EOL, $map['sections']);
       }
       elseif ($map['level'] === 0) {
@@ -490,6 +573,7 @@ class VisualSitemap {
           'sections' => $map['sections'],
         ]);
         $map['sections'] = $sections;
+        $stack[] = $map;
 
         return $this->twig->render('level.twig', [
           'level' => $map['level'],
@@ -497,6 +581,7 @@ class VisualSitemap {
         ]);
       }
 
+      $stack[] = $map;
       $rendered = $this->twig->render('level.twig', [
         'level' => $map['level'] + 1,
         'sections' => $map['sections'],
@@ -515,7 +600,7 @@ class VisualSitemap {
   public function save() {
     $files_saved = [];
     $files_saved[] = FilePath::create($this->getOutputFilePath())
-      ->put($this->html)
+      ->put($this->compiled)
       ->save()
       ->getPath();
 
@@ -530,6 +615,27 @@ class VisualSitemap {
    */
   public function getOutputFilePath() {
     $filepath = empty($this->outputFilePath) ? $this->definition->getDirName() . '/' . $this->definition->getFilename() . '.html' : $this->outputFilePath;
+    $extension = NULL;
+    switch ($this->compiledMime) {
+      case 'text/plain':
+        $extension = 'txt';
+        break;
+
+      case 'application/json':
+        $extension = 'compiled.json';
+        break;
+
+      case 'text/markdown':
+        $extension = 'md';
+        break;
+
+      case 'text/html':
+        $extension = 'html';
+        break;
+    }
+    if ($extension) {
+      $filepath = str_replace('.' . pathinfo($filepath, PATHINFO_EXTENSION), ".$extension", $filepath);
+    }
     if ($this->state) {
       $extension = pathinfo($filepath, PATHINFO_EXTENSION);
       $filepath = preg_replace("/(\.$extension)$/", '--' . $this->state . "$1", $filepath);

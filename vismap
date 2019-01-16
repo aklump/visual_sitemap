@@ -17,9 +17,10 @@ define('ROOT', dirname(__FILE__));
 require_once ROOT . '/includes/autoload.inc';
 
 try {
+  $cli = new Bash($argv);
+  $format = $cli->getParam('format', 'html');
 
   // Support for --state=* to produce all files.
-  $cli = new Bash($argv);
   if ($cli->getParam('state') === '*') {
     $definition = FilePath::create($cli->getArg(1))->load()->getJson(TRUE);
     $all_states = VisualSitemap::getDefinedStates($definition);
@@ -39,7 +40,20 @@ try {
   }
   else {
     require ROOT . '/includes/bootstrap.inc';
-    $files_saved = $vismap->generate()->save();
+    switch ($format) {
+      case 'json':
+        $files_saved = $vismap->generateJson()->save();
+        break;
+
+      case 'list':
+        $files_saved = $vismap->generateTextList()->save();
+        break;
+
+      case 'html':
+        $files_saved = $vismap->generate()->save();
+        break;
+
+    }
   }
 }
 catch (\Exception $exception) {
