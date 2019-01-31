@@ -62,6 +62,6 @@ catch (\Exception $exception) {
 }
 
 echo Color::wrap('green', 'Files created:') . PHP_EOL;
-echo Output::list($files_saved);
+echo Output::tree($files_saved);
 
 exit(0);
