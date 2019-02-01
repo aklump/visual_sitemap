@@ -467,7 +467,13 @@ class VisualSitemap {
     if ($definition['section'] && !empty($definition['notes'])) {
       $this->notes[] = [
         'title' => $definition['section'],
-        'items' => $definition['notes'],
+        'items' => array_map(function ($note) {
+
+          // Make URLs clickable.
+          return preg_replace_callback('/(https?:\/\/[^\s]+)/', function ($matches) {
+            return '<a href="' . $matches[1] . '">' . $matches[1] . '</a>';
+          }, $note);
+        }, $definition['notes']),
       ];
     }
 
