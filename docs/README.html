@@ -9,21 +9,19 @@
 
 <body class="page--readme">
 <header>
-  <div class="pager">
-  <a href="index.html" class="prev index">&laquo;Index</a>
-  <a href="index.html" class="index">Index</a>
-  <a href="notes.html" class="next notes">Additional Notes&raquo;</a>
-</div>
-</header>
-
-  <div class="search__wrapper">
+  <div class="pager"><a href="loft-docs.html" class="prev loft-docs">&laquo;Integration with Loft Docs</a><a href="index.html" class="index pager__book-title">Visual Sitemap</a><a href="privileged.html" class="next privileged">Privileged&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+      </div>      <div class="search__wrapper">
   <form action="search--results.html">
     <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
   </form>
 </div>
+  </section>
 
-  <h1>Overview</h1>
-  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<h1>Visual Sitemap</h1>
 
 <section>
 
@@ -128,14 +126,9 @@ vismap FILENAME.json -c
 </div>
 
 <footer>
-  <div class="pager">
-  <a href="index.html" class="prev index">&laquo;Index</a>
-  <a href="index.html" class="index">Index</a>
-  <a href="notes.html" class="next notes">Additional Notes&raquo;</a>
-</div>
-  
+  <div class="pager"><a href="loft-docs.html" class="prev loft-docs">&laquo;Integration with Loft Docs</a><a href="index.html" class="index pager__book-title">Visual Sitemap</a><a href="privileged.html" class="next privileged">Privileged&raquo;</a></div>  
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 1.0.11 &bull; Last Updated: Wed, 30 Jan 2019 17:59:02 -0800</p>
+    <p class="legaleeze center">Version: 1.0.11 &bull; Last Updated: Wed, 10 Apr 2019 17:19:45 -0700</p>
   </div>
 </footer>
 
@@ -144,9 +137,9 @@ vismap FILENAME.json -c
   <script src="search/tipuesearch_set.js"></script>
   <script src="search/tipuesearch.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $('#tipue_search_input').tipuesearch();
-    });
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
   </script>
 <script src="js/core.js"></script>
 </body>

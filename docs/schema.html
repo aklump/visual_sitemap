@@ -9,21 +9,19 @@
 
 <body class="page--schema">
 <header>
-  <div class="pager">
-  <a href="privileged.html" class="prev privileged">&laquo;Privileged</a>
-  <a href="index.html" class="index">Index</a>
-  <a href="test-coverage.html" class="next test-coverage">Test Coverage&raquo;</a>
-</div>
-</header>
-
-  <div class="search__wrapper">
+  <div class="pager"><a href="states.html" class="prev states">&laquo;How to Use States For Sitemap Variations</a><a href="index.html" class="index pager__book-title">Visual Sitemap</a><a href="loft-docs.html" class="next loft-docs">Integration with Loft Docs&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+      </div>      <div class="search__wrapper">
   <form action="search--results.html">
     <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
   </form>
 </div>
+  </section>
 
-  <h1>How to Write the Sitemap Definition</h1>
-  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<h1>How to Write the Sitemap Definition</h1>
 
 <section>
 
@@ -33,12 +31,15 @@
 
 <pre><code>{
     "title": "",
+    "feature": "",
     "more": "",
     "type": "",
     "path": "",
     "sections": []
 }
 </code></pre>
+
+<p>The <code>feature</code> key can be used to link an object to an external feature UUID, such as with Taskcamp.</p>
 
 <h2>Top-Level</h2>
 
@@ -55,7 +56,9 @@
 <li><code>baseUrl</code> Used to generate URL tokens.</li>
 <li><code>footer</code> Optional footer text.</li>
 <li><code>subtitle</code> Optional subtitle.</li>
+<li><code>description</code> Optional description.</li>
 <li><code>timezone</code> The timezone name to localize to.</li>
+<li><code>branding_color</code> A hex code of the main color; for quick branding without CSS.</li>
 </ul>
 
 <p>Here is a stub to start your file:</p>
@@ -64,7 +67,9 @@
     "timezone": "",
     "baseUrl": "",
     "title": "",
+    "branding_color": "",
     "subtitle": "",
+    "description": "",
     "footer": "",
     "more": "",
     "sections": []
@@ -154,14 +159,9 @@
 </div>
 
 <footer>
-  <div class="pager">
-  <a href="privileged.html" class="prev privileged">&laquo;Privileged</a>
-  <a href="index.html" class="index">Index</a>
-  <a href="test-coverage.html" class="next test-coverage">Test Coverage&raquo;</a>
-</div>
-  
+  <div class="pager"><a href="states.html" class="prev states">&laquo;How to Use States For Sitemap Variations</a><a href="index.html" class="index pager__book-title">Visual Sitemap</a><a href="loft-docs.html" class="next loft-docs">Integration with Loft Docs&raquo;</a></div>  
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 1.0.11 &bull; Last Updated: Wed, 30 Jan 2019 17:59:04 -0800</p>
+    <p class="legaleeze center">Version: 1.0.11 &bull; Last Updated: Wed, 10 Apr 2019 17:19:46 -0700</p>
   </div>
 </footer>
 
@@ -170,9 +170,9 @@
   <script src="search/tipuesearch_set.js"></script>
   <script src="search/tipuesearch.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $('#tipue_search_input').tipuesearch();
-    });
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
   </script>
 <script src="js/core.js"></script>
 </body>

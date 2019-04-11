@@ -2,53 +2,54 @@
 
 <html>
 <head>
-  <title></title>
+  <title>Visual Sitemap</title>
   <link href="search/tipuesearch.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
 </head>
 
 <body class="page--index">
 <header>
-  <div class="pager">
-  <a href="loft-docs.html" class="prev loft-docs">&laquo;Integration with Loft Docs</a>
-  <a href="index.html" class="index">Index</a>
-  <a href="README.html" class="next readme">Overview&raquo;</a>
-</div>
-</header>
-
-  <div class="search__wrapper">
+  <div class="pager"><a href="test-coverage.html" class="prev test-coverage">&laquo;Test Coverage</a><span class="pager__book-title">Visual Sitemap</span><a href="notes.html" class="next notes">Additional Notes&raquo;</a></div></header>
+<section class="sub-header">
+        <div class="search__wrapper">
   <form action="search--results.html">
     <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
   </form>
 </div>
+  </section>
 
-  <h1>Index</h1>
 
-<section><ul class="index">
-      <li><a href="README.html">Overview</a></li>
-      <li><a href="notes.html">Additional Notes</a></li>
-      <li><a href="privileged.html">Privileged</a></li>
-      <li><a href="schema.html">How to Write the Sitemap Definition</a></li>
-      <li><a href="test-coverage.html">Test Coverage</a></li>
-      <li><a href="theming.html">How to Override the Markup (Custom Theming)</a></li>
-      <li><a href="states.html">How to Use States For Sitemap Variations</a></li>
-      <li><a href="loft-docs.html">Integration with Loft Docs</a></li>
-  </ul>
-</section>
+<h1></h1>
+
+  
+    <section>
+    <ul class="index">
+              <li><a href="notes.html">Additional Notes</a></li>
+              <li><a href="theming.html">How to Override the Markup (Custom Theming)</a></li>
+              <li><a href="states.html">How to Use States For Sitemap Variations</a></li>
+              <li><a href="schema.html">How to Write the Sitemap Definition</a></li>
+              <li><a href="loft-docs.html">Integration with Loft Docs</a></li>
+              <li><a href="README.html">Overview</a></li>
+              <li><a href="privileged.html">Privileged</a></li>
+              <li><a href="test-coverage.html">Test Coverage</a></li>
+          </ul>
+  </section>
+
+
+
+
+
+
+
 
 <div class="search__results">
   <div id="tipue_search_content"></div>
 </div>
 
 <footer>
-  <div class="pager">
-  <a href="loft-docs.html" class="prev loft-docs">&laquo;Integration with Loft Docs</a>
-  <a href="index.html" class="index">Index</a>
-  <a href="README.html" class="next readme">Overview&raquo;</a>
-</div>
-  
+  <div class="pager"><a href="test-coverage.html" class="prev test-coverage">&laquo;Test Coverage</a><span class="pager__book-title">Visual Sitemap</span><a href="notes.html" class="next notes">Additional Notes&raquo;</a></div>  
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 1.0.11 &bull; Last Updated: Wed, 30 Jan 2019 17:59:05 -0800</p>
+    <p class="legaleeze center">Version: 1.0.11 &bull; Last Updated: Wed, 10 Apr 2019 17:19:47 -0700</p>
   </div>
 </footer>
 
@@ -57,9 +58,9 @@
   <script src="search/tipuesearch_set.js"></script>
   <script src="search/tipuesearch.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $('#tipue_search_input').tipuesearch();
-    });
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
   </script>
 <script src="js/core.js"></script>
 </body>

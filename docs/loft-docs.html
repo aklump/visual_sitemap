@@ -9,21 +9,19 @@
 
 <body class="page--loft-docs">
 <header>
-  <div class="pager">
-  <a href="states.html" class="prev states">&laquo;How to Use States For Sitemap Variations</a>
-  <a href="index.html" class="index">Index</a>
-  <a href="index.html" class="next index">Index&raquo;</a>
-</div>
-</header>
-
-  <div class="search__wrapper">
+  <div class="pager"><a href="schema.html" class="prev schema">&laquo;How to Write the Sitemap Definition</a><a href="index.html" class="index pager__book-title">Visual Sitemap</a><a href="README.html" class="next readme">Overview&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+      </div>      <div class="search__wrapper">
   <form action="search--results.html">
     <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
   </form>
 </div>
+  </section>
 
-  <h1>Integration with Loft Docs</h1>
-  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<h1>Integration with Loft Docs</h1>
 
 <section>
 
@@ -35,10 +33,10 @@
 ├── hooks
 │   └── sitemap.sh
 ├── sitemap
-│   ├── html.twig *
+│   ├── html.twig
 │   └── sitemap.json
 └── source
-    └── sitemap.md
+    └── site-structure.md
 </code></pre>
 
 <ul>
@@ -55,7 +53,7 @@
 docs_vismap=$(type vismap &gt;/dev/null &amp;2&gt;&amp;1 &amp;&amp; which vismap)
 
 if [ "$docs_vismap" ]; then
-    cd "$1" &amp;&amp; $docs_vismap "$4/sitemap/sitemap.json" --out="$9/vismap.html" -f --theme="$4/sitemap" &amp;&amp; exit 0
+    cd "$1" &amp;&amp; $docs_vismap "$4/sitemap/sitemap.json" --out="$9/sitemap.html" -f --theme="$4/sitemap" &amp;&amp; exit 0
     exit 1
 fi
 </code></pre></li>
@@ -63,16 +61,17 @@ fi
 
 <pre><code>pre_hooks = "sitemap.sh"
 </code></pre></li>
-<li><p>Create a folder <em>documentation/sitemap</em>.</p></li>
-<li>Create your sitemap json in <em>documentation/sitemap/sitemap.json</em>.</li>
-<li>Optional, place template overrides in <em>documentation/sitemap</em>.</li>
-<li><p>Create a wrapper file called <em>sitemap.md</em> with something like the following; the <code>iframe</code> is the important part.  You may add other content as necessary around the iframe.</p>
+<li><p>Create a folder adjacent to <em>source/</em> called <em>sitemap/</em>.</p></li>
+<li>Create your sitemap json in <em>sitemap/sitemap.json</em>.</li>
+<li>Optional, place template overrides in <em>sitemap</em>.</li>
+<li><p>Create a wrapper file called <em>site-structure.md</em> with something like the following; the <code>iframe</code> is the important part.  You may add other content as necessary around the iframe.</p>
 
-<pre><code># Visual Sitemap
+<pre><code># Site Structure
 
-&lt;iframe src="vismap.html" height="1200"&gt;&lt;/iframe&gt;
+&lt;a href="sitemap.html" target="_blank"&gt;open in a new window&lt;/a&gt;
+&lt;iframe src="sitemap.html" height="1200"&gt;&lt;/iframe&gt;
 </code></pre></li>
-<li><p>Now compile your documentation and ensure all is as expected.  You can use <em>vismap.html</em> as a standalone file, or you can view it wrapped by <em>sitemap.html</em> as part of the documentation.</p></li>
+<li><p>Now compile your documentation and ensure all is as expected.</p></li>
 </ol>
 </section>
 
@@ -81,14 +80,9 @@ fi
 </div>
 
 <footer>
-  <div class="pager">
-  <a href="states.html" class="prev states">&laquo;How to Use States For Sitemap Variations</a>
-  <a href="index.html" class="index">Index</a>
-  <a href="index.html" class="next index">Index&raquo;</a>
-</div>
-  
+  <div class="pager"><a href="schema.html" class="prev schema">&laquo;How to Write the Sitemap Definition</a><a href="index.html" class="index pager__book-title">Visual Sitemap</a><a href="README.html" class="next readme">Overview&raquo;</a></div>  
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 1.0.11 &bull; Last Updated: Wed, 30 Jan 2019 17:59:03 -0800</p>
+    <p class="legaleeze center">Version: 1.0.11 &bull; Last Updated: Wed, 10 Apr 2019 17:19:45 -0700</p>
   </div>
 </footer>
 
@@ -97,9 +91,9 @@ fi
   <script src="search/tipuesearch_set.js"></script>
   <script src="search/tipuesearch.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $('#tipue_search_input').tipuesearch();
-    });
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
   </script>
 <script src="js/core.js"></script>
 </body>
