@@ -68,7 +68,7 @@
         },
         "branding_color": {
             "type": "string",
-            "pattern": "^#[\\d]{6}$"
+            "pattern": "^#[\\da-f]{6}$"
         },
         "subtitle": {
             "type": "string"
