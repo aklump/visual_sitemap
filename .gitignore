@@ -5,3 +5,6 @@
 /vendor
 /user_templates/*
 !/user_templates/.gitkeep
+/documentation/core
+/documentation/README.md
+/.idea

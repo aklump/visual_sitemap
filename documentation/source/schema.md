@@ -6,20 +6,44 @@ The schema is very simple, a nested group of objects, each following this patter
 
     {
         "title": "",
+        "feature": "",
         "more": "",
         "type": "",
         "path": "",
         "sections": []
     }
 
+The `feature` key can be used to link an object to an external feature UUID, such as with Taskcamp.
+
 ## Top-Level
+
+The top-level node only, may not have these keys:
+
+* `type`
+* `path`
 
 The top-level node only, takes the following additional keys:
 
 * `baseUrl` Used to generate URL tokens.
 * `footer` Optional footer text.
 * `subtitle` Optional subtitle.
+* `description` Optional description.
 * `timezone` The timezone name to localize to.
+* `branding_color` A hex code of the main color; for quick branding without CSS.
+
+Here is a stub to start your file:
+
+    {
+        "timezone": "",
+        "baseUrl": "",
+        "title": "",
+        "branding_color": "",
+        "subtitle": "",
+        "description": "",
+        "footer": "",
+        "more": "",
+        "sections": []
+    }
 
 ## Nesting
 
@@ -74,6 +98,6 @@ Optional, URL hyperlink to anything that provides more info for the section, a T
 
 | token | description |
 |----------|----------|
-| {{ url }} | An absolute URL generated using the baseUrl and the `path` of the section  |
-| {{ path }} | The `path` of the section  |
-| {{ base }} | The value of the baseUrl configuration variable |
+| `{{ url }}`| An absolute URL generated using the baseUrl and the `path` of the section  |
+| `{{ path }}` | The `path` of the section  |
+| `{{ base }}` | The value of the baseUrl configuration variable |
