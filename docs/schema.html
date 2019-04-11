@@ -42,6 +42,13 @@
 
 <h2>Top-Level</h2>
 
+<p>The top-level node only, may not have these keys:</p>
+
+<ul>
+<li><code>type</code></li>
+<li><code>path</code></li>
+</ul>
+
 <p>The top-level node only, takes the following additional keys:</p>
 
 <ul>
@@ -50,6 +57,19 @@
 <li><code>subtitle</code> Optional subtitle.</li>
 <li><code>timezone</code> The timezone name to localize to.</li>
 </ul>
+
+<p>Here is a stub to start your file:</p>
+
+<pre><code>{
+    "timezone": "",
+    "baseUrl": "",
+    "title": "",
+    "subtitle": "",
+    "footer": "",
+    "more": "",
+    "sections": []
+}
+</code></pre>
 
 <h2>Nesting</h2>
 
@@ -114,15 +134,15 @@
 </thead>
 <tbody>
 <tr>
-  <td>{{ url }}</td>
+  <td><code>{{ url }}</code></td>
   <td>An absolute URL generated using the baseUrl and the <code>path</code> of the section</td>
 </tr>
 <tr>
-  <td>{{ path }}</td>
+  <td><code>{{ path }}</code></td>
   <td>The <code>path</code> of the section</td>
 </tr>
 <tr>
-  <td>{{ base }}</td>
+  <td><code>{{ base }}</code></td>
   <td>The value of the baseUrl configuration variable</td>
 </tr>
 </tbody>
@@ -141,7 +161,7 @@
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 1.0.11 &bull; Last Updated: Wed, 16 Jan 2019 13:09:15 -0800</p>
+    <p class="legaleeze center">Version: 1.0.11 &bull; Last Updated: Wed, 30 Jan 2019 17:59:04 -0800</p>
   </div>
 </footer>
 

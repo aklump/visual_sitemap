@@ -1,4 +1,0 @@
-name = "Kit for PHP"
-description = "PHP classes for compiling CodeKit's Kit Language (for HTML)."
-version = 0.2.4
-author = Aaron Klump <sourcecode@intheloftstudios.com>

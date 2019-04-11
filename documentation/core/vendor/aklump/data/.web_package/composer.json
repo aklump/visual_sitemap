@@ -1,6 +1,0 @@
-{
-  "autoload": {
-    "psr-0": {"AKlump\\": "src/"},
-    "files": ["functions.php"]
-  }
-}
