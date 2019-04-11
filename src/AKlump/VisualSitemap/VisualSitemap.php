@@ -156,7 +156,12 @@ class VisualSitemap {
       return version_compare($a['section'], $b['section']);
     });
 
-    $json = array_intersect_key($build, array_flip(['title', 'subtitle', 'description', 'baseUrl']));
+    $json = array_intersect_key($build, array_flip([
+      'title',
+      'subtitle',
+      'description',
+      'baseUrl',
+    ]));
     foreach ($sections as $section) {
       $json['sections'][] = array_intersect_key($section, array_flip([
           'path',
@@ -299,7 +304,7 @@ class VisualSitemap {
   }
 
   /**
-   * Return all states that are considered priveleged.
+   * Return all states that are considered privileged.
    *
    * @return array
    *   An indexed array of states.
@@ -310,7 +315,7 @@ class VisualSitemap {
     }
 
     return array_keys(array_filter($definition['states'], function ($state) {
-      return !empty($state['priveleged']);
+      return !empty($state['privileged']);
     }));
   }
 
@@ -332,9 +337,10 @@ class VisualSitemap {
   protected function preprocess(array &$definition, array $context = []) {
     $this->processed = TRUE;
     $all_states = $this->getStates();
-    if (!($privileged_states = $this->getCached('states'))) {
+    $privileged_states = $this->getCached('privileged_states');
+    if (is_null($privileged_states)) {
       $privileged_states = static::getAllPrivilegedStates($definition);
-      $this->setCached('states', $privileged_states);
+      $this->setCached('privileged_states', $privileged_states);
     }
 
     $context += [

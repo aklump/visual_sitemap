@@ -9,6 +9,10 @@
 .notes__content {
   @include margin_bottom();
   p {
+    margin: .25em;
+  }
+  p:last-child {
     @include margin_bottom();
   }
 }
+

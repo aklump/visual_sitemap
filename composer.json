@@ -21,10 +21,10 @@
     "require": {
         "php": ">=5.6",
         "twig\/twig": "^1.35",
-        "aklump\/loft-lib": "^1.0.2",
         "jasonlewis\/resource-watcher": "^1.2",
         "justinrainbow\/json-schema": "^5.2",
-        "aklump\/data": "^0.0.28"
+        "aklump\/data": "^0.0.28",
+        "aklump/loft-lib": "^1.0"
     },
     "autoload": {
         "psr-4": {
