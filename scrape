@@ -1,0 +1,52 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * @file
+ * Controller for scraping based on a sitemap
+ *
+ * You must pass the path to *.compiled.json to this script.
+ */
+
+use AKlump\LoftLib\Bash\Bash;
+use AKlump\LoftLib\Bash\Color;
+use AKlump\LoftLib\Bash\Output;
+use AKlump\VisualSitemap\Scraper\Manager;
+use AKlump\VisualSitemap\Scraper\ChromeManualScraper;
+use AKlump\VisualSitemap\Scraper\WgetScraper;
+
+define('ROOT', dirname(__FILE__));
+
+require_once ROOT . '/includes/autoload.inc';
+
+try {
+  $cli = new Bash($argv);
+  $path_to_compiled_json = $cli->getArg(1);
+  $manager = new Manager();
+  $json = file_get_contents($path_to_compiled_json);
+  $manager->setSource($json);
+  $urls = $manager->getUrls();
+
+  $wget = new WgetScraper();
+  $wd = dirname($path_to_compiled_json) . '/previews';
+  $wget->setDestination($wd);
+
+  $chrome = new ChromeManualScraper();
+  $wd = dirname($path_to_compiled_json) . '/scrape';
+  $chrome->setDestination($wd);
+
+  foreach ($urls as $url) {
+    $chrome->saveAs($url);
+    $wget->saveAs($url);
+    $output[] = $url;
+  }
+  $output = array_merge($output, $chrome->getInstructions());
+  $output = array_merge($output, $wget->getInstructions());
+}
+catch (\Exception $exception) {
+  echo Color::wrap('red', $exception->getMessage() . PHP_EOL);
+  exit(1);
+}
+
+echo Output::tree($output);
+exit(0);
