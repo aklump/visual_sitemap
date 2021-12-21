@@ -28,6 +28,10 @@
   font-weight: bold;
 }
 
+.section--level9,
+.section--level8,
+.section--level7,
+.section--level6,
 .section--level5,
 .section--level4,
 .section--level3 {
@@ -68,6 +72,10 @@
     border-color: $color--grey--lines;
     border-width: 3px;
   }
+  .section--level9 &,
+  .section--level8 &,
+  .section--level7 &,
+  .section--level6 &,
   .section--level5 &,
   .section--level4 &,
   .section--level3 & {
