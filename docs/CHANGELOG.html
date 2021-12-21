@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Changelog</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--changelog">
+<header>
+  <div class="pager"><a href="notes.html" class="prev notes">&laquo;Additional Notes</a><a href="index.html" class="index pager__book-title">Visual Sitemap</a><a href="theming.html" class="next theming">How to Override the Markup (Custom Theming)&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+      </div>      <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+  </section>
+
+
+<h1>Changelog</h1>
+
+<section>
+
+<p>All notable changes to this project will be documented in this file.</p>
+
+<p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>, and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
+
+<h2>[1.1.0] - 2021-12-20</h2>
+
+<h3>Added</h3>
+
+<ul>
+<li>Experimental <code>scrape</code> feature. See docs for more info.</li>
+</ul>
+
+<h3>Changed</h3>
+
+<ul>
+<li>Bumped the minimum php to 7.3</li>
+</ul>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager"><a href="notes.html" class="prev notes">&laquo;Additional Notes</a><a href="index.html" class="index pager__book-title">Visual Sitemap</a><a href="theming.html" class="next theming">How to Override the Markup (Custom Theming)&raquo;</a></div>  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 1.1.0 &bull; Last Updated: Mon, 20 Dec 2021 22:25:54 -0800</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

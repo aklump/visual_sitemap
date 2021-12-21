@@ -2,14 +2,14 @@
 
 <html>
 <head>
-  <title></title>
+  <title>Scraping an Existing Site</title>
   <link href="search/tipuesearch.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
 </head>
 
-<body class="">
+<body class="page--scrape">
 <header>
-  <div class="pager"><a href="javascript:void(0)" class="prev ">&laquo;</a><a href="index.html" class="index pager__book-title">Visual Sitemap</a><a href="javascript:void(0)" class="next ">&raquo;</a></div></header>
+  <div class="pager"><a href="privileged.html" class="prev privileged">&laquo;Privileged</a><a href="index.html" class="index pager__book-title">Visual Sitemap</a><a href="test-coverage.html" class="next test-coverage">Test Coverage&raquo;</a></div></header>
 <section class="sub-header">
   <div class="breadcrumbs"><a href="index.html">Index</a>
          &raquo
@@ -21,9 +21,24 @@
   </section>
 
 
-<h1></h1>
+<h1>Scraping an Existing Site</h1>
 
 <section>
+
+<blockquote>
+  <p>This is an experimental feature; use at your own risk.</p>
+</blockquote>
+
+<ol>
+<li>Once you have the sitemap complete, that represents an existing website.</li>
+<li>Compile using <code>--format=json</code> to get the compile file.</li>
+<li>Pass that compiled file to <em>scrape</em> to scrape the website based on the sitemap.</li>
+<li>Follow the instructions in the output.</li>
+</ol>
+
+<pre><code class="bash">./vendor/bin/vismap website.json --format=json
+./vendor/bin/scrape website.compile.json
+</code></pre>
 </section>
 
 <div class="search__results">
@@ -31,7 +46,7 @@
 </div>
 
 <footer>
-  <div class="pager"><a href="javascript:void(0)" class="prev ">&laquo;</a><a href="index.html" class="index pager__book-title">Visual Sitemap</a><a href="javascript:void(0)" class="next ">&raquo;</a></div>  
+  <div class="pager"><a href="privileged.html" class="prev privileged">&laquo;Privileged</a><a href="index.html" class="index pager__book-title">Visual Sitemap</a><a href="test-coverage.html" class="next test-coverage">Test Coverage&raquo;</a></div>  
   <div id="footer-legaleeze">
     <p class="legaleeze center">Version: 1.1.0 &bull; Last Updated: Mon, 20 Dec 2021 22:25:57 -0800</p>
   </div>
